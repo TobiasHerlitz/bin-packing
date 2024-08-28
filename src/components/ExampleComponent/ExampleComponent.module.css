@@ -1,0 +1,5 @@
+@import url('@globalStyle');
+
+.exampleText {
+  margin-left: var(--gap);
+}

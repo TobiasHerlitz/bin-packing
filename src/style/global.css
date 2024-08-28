@@ -1,0 +1,30 @@
+/* Variables for the light color theme  */
+:root, [color-theme="light"] {
+  --bg-color: #F5F5F5;
+  --primary-color: #794B0F;
+}
+
+/* Variables for the dark color theme  */
+[color-theme="dark"] {
+  --bg-color: #1A1A1A;
+  --primary-color: #F6D8B1;
+}
+
+:root {
+  --gap: 8px;
+
+  background: var(--bg-color);
+  color: var(--primary-color);
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}

@@ -1,0 +1,8 @@
+.canvasWrapper {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: blue;
+}
