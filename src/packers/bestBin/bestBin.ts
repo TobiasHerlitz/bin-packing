@@ -1,6 +1,6 @@
-import { Coordinate, Size } from '@types';
+import { Bin, Coordinate, Size } from '@types';
 
-import { Bin, sortBins } from './bin';
+import { sortBins } from './bin';
 import { getRotatedSize, Item, PlacedItem, Rotation, sortItems } from './item';
 
 enum Axis {

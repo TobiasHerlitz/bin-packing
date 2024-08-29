@@ -1,1 +1,1 @@
-export { bestBin, exampleBins, exampleItems } from './bestBin';
+export { bestBin } from './bestBin';

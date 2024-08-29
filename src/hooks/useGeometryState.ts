@@ -1,6 +1,6 @@
 import { GeometryContext } from '@state';
 import { useContext } from 'react';
 
-export function useStageState() {
+export function useGeometryState() {
   return useContext(GeometryContext);
 }

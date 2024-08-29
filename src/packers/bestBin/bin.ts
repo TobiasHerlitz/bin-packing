@@ -1,13 +1,4 @@
-import { Size } from '@types';
-
-import { PlacedItem } from './item';
-
-export interface Bin {
-  name: string;
-  size: Size;
-  maxWeight: number;
-  items: PlacedItem[];
-}
+import { Bin } from '@types';
 
 export function sortBins(bins: Bin[]) {
   // TODO: sort small to large

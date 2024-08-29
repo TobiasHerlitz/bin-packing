@@ -1,5 +1,6 @@
 import { Bin, Parcel, SceneHelpers } from '@components';
-import { bestBin, exampleBins, exampleItems } from '@packers';
+import { useGeometryState } from '@hooks';
+import { bestBin } from '@packers';
 import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { MutableRefObject } from 'react';
@@ -12,11 +13,12 @@ interface SceneProps {
 
 export const Scene = ({ cameraRef }: SceneProps) => {
   const parcelColors = ['#001B2E', '#294C60', '#ADB6C4', '#FFEFD3', '#FFC49B'];
-  const bin = bestBin(exampleBins, exampleItems);
+  const { bins, parcels } = useGeometryState();
+  const bin = bestBin(bins, parcels);
   if (!bin.items) {
     console.warn('Failed');
   }
-  const parcels = bin.items.map((item, index) => (
+  const placedParcels = bin.items.map((item, index) => (
     <Parcel
       name={item.name}
       key={item.name}
@@ -42,7 +44,7 @@ export const Scene = ({ cameraRef }: SceneProps) => {
           inclination={0}
           azimuth={0.25}
         />
-        <Bin size={bin.size} parcels={parcels} />
+        <Bin size={bin.size} parcels={placedParcels} />
         <CameraControls ref={cameraRef} makeDefault />
       </Canvas>
     </div>
