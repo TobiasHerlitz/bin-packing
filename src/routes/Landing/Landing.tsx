@@ -1,14 +1,13 @@
-import { Scene, SceneControls } from '@components';
-import { StageProvider } from '@state';
-import { useRef } from 'react';
+import { Controls, Scene } from '@components';
+import { GeometryProvider, StageProvider } from '@state';
 
 export const Landing = () => {
-  const cameraRef = useRef(null);
-
   return (
     <StageProvider>
-      <Scene cameraRef={cameraRef} />
-      <SceneControls cameraRef={cameraRef} />
+      <GeometryProvider>
+        <Scene />
+        <Controls />
+      </GeometryProvider>
     </StageProvider>
   );
 };

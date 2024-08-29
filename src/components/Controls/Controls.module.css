@@ -1,0 +1,39 @@
+@import url('@globalStyle');
+
+.root {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+}
+
+.controls {
+  position: relative;
+  display: flex;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  height: 100vh;
+  backdrop-filter: blur(10px);
+}
+
+.categoryButton {
+  font-size: 50px;
+  padding: calc(var(--gap) * 3) calc(var(--gap) * 0.5);
+  backdrop-filter: blur(10px);
+  background-color: var(--primary-color-40);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 8px 0 0 8px;
+}
+
+.categoryButton:hover {
+  background-color: var(--primary-color);
+  color: white;
+}

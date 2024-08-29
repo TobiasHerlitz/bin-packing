@@ -1,19 +1,17 @@
 import { Bin, Parcel, SceneHelpers } from '@components';
-import { useGeometryState } from '@hooks';
+import { useGeometryState, useStageDispatch } from '@hooks';
 import { bestBin } from '@packers';
 import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { MutableRefObject } from 'react';
+import { useEffect, useRef } from 'react';
 
 import styles from './Scene.module.css';
 
-interface SceneProps {
-  cameraRef: MutableRefObject<CameraControls | null>;
-}
-
-export const Scene = ({ cameraRef }: SceneProps) => {
+export const Scene = () => {
+  const cameraRef = useRef(null);
   const parcelColors = ['#001B2E', '#294C60', '#ADB6C4', '#FFEFD3', '#FFC49B'];
   const { bins, parcels } = useGeometryState();
+  const stageDispatch = useStageDispatch();
   const bin = bestBin(bins, parcels);
   if (!bin.items) {
     console.warn('Failed');
@@ -31,6 +29,12 @@ export const Scene = ({ cameraRef }: SceneProps) => {
       }}
     />
   ));
+
+  useEffect(() => {
+    if (!cameraRef) return;
+
+    stageDispatch({ type: 'setCameraRef', cameraRef });
+  }, [cameraRef, stageDispatch]);
 
   return (
     <div className={styles.canvasWrapper}>

@@ -12,6 +12,9 @@ export function stageReducer(
     case 'selectParcel': {
       return { ...state, selectedParcel: action.parcelName };
     }
+    case 'setCameraRef': {
+      return { ...state, cameraRef: action.cameraRef };
+    }
     default: {
       throw Error('Unknown action in stageReducer');
     }

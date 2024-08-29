@@ -12,6 +12,9 @@
 
 :root {
   --gap: 8px;
+  --primary-color-80: color-mix(in oklab, var(--primary-color) 80%, transparent);
+  --primary-color-60: color-mix(in oklab, var(--primary-color) 60%, transparent);
+  --primary-color-40: color-mix(in oklab, var(--primary-color) 40%, transparent);
 
   background: var(--bg-color);
   color: var(--primary-color);
@@ -27,4 +30,11 @@ h1 {
 
 h2 {
   margin: 0;
+}
+
+button {
+  font-size: 50px;
+/*  backdrop-filter: blur(10px);*/
+  background: color-mix(in oklab var(--primary-color), 50%, #FFFFFF);
+  border: none;
 }

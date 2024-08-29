@@ -1,8 +1,10 @@
 export { Bin } from './Bin';
 export { ColorThemeToggle } from './ColorThemeToggle';
+export { Controls } from './Controls';
 export { ExampleComponent } from './ExampleComponent';
+export { GeometryControls } from './GeometryControls';
 export { Parcel } from './Parcel';
 export { RoutingRoot } from './RoutingRoot';
 export { Scene } from './Scene';
-export { SceneControls } from './SceneControls';
 export { SceneHelpers } from './SceneHelpers';
+export { StageControls } from './StageControls';
