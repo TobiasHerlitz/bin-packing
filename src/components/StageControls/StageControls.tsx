@@ -7,7 +7,7 @@ export const StageControls = () => {
   const stageDispatch = useStageDispatch();
   return (
     <div className={styles.root}>
-      <h2>Scene Controls</h2>
+      <h2>Stage Controls</h2>
       <div className={styles.actions}>
         <span>
           <label htmlFor="toggleGrid">Show grid</label>

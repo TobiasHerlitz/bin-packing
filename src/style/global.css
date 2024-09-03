@@ -1,14 +1,17 @@
 /* Variables for the light color theme  */
 :root, [color-theme="light"] {
   --bg-color: #F5F5F5;
-  --primary-color: #794B0F;
+  --primary-color: #3C3C6B;
+  --secondary-color: #6B3C3C;
+  --tertiary-color: #3C6B3C;
 }
 
 /* Variables for the dark color theme  */
-[color-theme="dark"] {
-  --bg-color: #1A1A1A;
-  --primary-color: #F6D8B1;
-}
+/*[color-theme="dark"] {
+  --primary-color: #595CA6;
+  --secondary-color: #A6595C;
+  --tertiary-color: #5CA659;
+}*/
 
 :root {
   --gap: 8px;
@@ -16,8 +19,26 @@
   --primary-color-60: color-mix(in oklab, var(--primary-color) 60%, transparent);
   --primary-color-40: color-mix(in oklab, var(--primary-color) 40%, transparent);
 
+  --secondary-color-80: color-mix(in oklab, var(--secondary-color) 80%, transparent);
+  --secondary-color-60: color-mix(in oklab, var(--secondary-color) 60%, transparent);
+  --secondary-color-40: color-mix(in oklab, var(--secondary-color) 40%, transparent);
+
+  --tertiary-color-80: color-mix(in oklab, var(--tertiary-color) 80%, transparent);
+  --tertiary-color-60: color-mix(in oklab, var(--tertiary-color) 60%, transparent);
+  --tertiary-color-40: color-mix(in oklab, var(--tertiary-color) 40%, transparent);
+
   background: var(--bg-color);
   color: var(--primary-color);
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
@@ -32,9 +53,47 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  margin: 0;
+}
+
+p {
+  padding: 0;
+  margin: var(--gap) 0;
+}
+
 button {
-  font-size: 50px;
-/*  backdrop-filter: blur(10px);*/
-  background: color-mix(in oklab var(--primary-color), 50%, #FFFFFF);
-  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  background: var(--primary-color-40);
+  padding: var(--gap);
+  border: solid 2px var(--primary-color);
+  border-radius: 8px;
+}
+
+button:hover {
+  color: white;
+  background: var(--primary-color);
+}
+
+input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: calc(var(--gap) * 0.2);
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+hr {
+  width: 100%;
 }

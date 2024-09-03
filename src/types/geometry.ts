@@ -9,3 +9,12 @@ export interface Coordinate {
   y: number;
   z: number;
 }
+
+export enum Rotation {
+  WHD = 'WHD',
+  HWD = 'HWD',
+  HDW = 'HDW',
+  DHW = 'DHW',
+  DWH = 'DWH',
+  WDH = 'WDH',
+}

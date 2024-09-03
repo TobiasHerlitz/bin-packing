@@ -1,8 +1,8 @@
 import { Bin, Parcel, SceneHelpers } from '@components';
 import { useGeometryState, useStageDispatch } from '@hooks';
-import { bestBin } from '@packers';
 import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { sizeToMeters } from '@utils';
 import { useEffect, useRef } from 'react';
 
 import styles from './Scene.module.css';
@@ -10,22 +10,23 @@ import styles from './Scene.module.css';
 export const Scene = () => {
   const cameraRef = useRef(null);
   const parcelColors = ['#001B2E', '#294C60', '#ADB6C4', '#FFEFD3', '#FFC49B'];
-  const { bins, parcels } = useGeometryState();
+  const { bins } = useGeometryState();
   const stageDispatch = useStageDispatch();
-  const bin = bestBin(bins, parcels);
-  if (!bin.items) {
+  if (!bins[0] || !bins[0].items) {
     console.warn('Failed');
   }
+  const bin = bins[0];
+  console.log(bin.items.length);
   const placedParcels = bin.items.map((item, index) => (
     <Parcel
       name={item.name}
       key={item.name}
       color={parcelColors[index % 4]}
-      size={item.size}
+      size={sizeToMeters(item.rotatedSize)}
       position={{
-        x: item.position.x + item.size.width / 2,
-        y: item.position.y + item.size.height / 2,
-        z: item.position.z + item.size.depth / 2,
+        x: (item.position.x + item.size.width / 2) / 100,
+        y: (item.position.y + item.size.height / 2) / 100,
+        z: (item.position.z + item.size.depth / 2) / 100,
       }}
     />
   ));
@@ -48,7 +49,7 @@ export const Scene = () => {
           inclination={0}
           azimuth={0.25}
         />
-        <Bin size={bin.size} parcels={placedParcels} />
+        <Bin size={sizeToMeters(bin.size)} parcels={placedParcels} />
         <CameraControls ref={cameraRef} makeDefault />
       </Canvas>
     </div>

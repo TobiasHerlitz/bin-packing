@@ -18,11 +18,14 @@ interface Tab {
 export const Controls = () => {
   const [selectedTab, setSelectedTab] = useState<Tab>();
   const controlsRef = useRef(null);
+
   const tabs = [
     {
       category: TabCategory.Geometry,
       icon: 'package_2',
-      component: <GeometryControls />,
+      component: (
+        <GeometryControls closeControls={() => setSelectedTab(undefined)} />
+      ),
     },
     {
       category: TabCategory.Stage,
@@ -35,6 +38,7 @@ export const Controls = () => {
     refs: [controlsRef],
     callback: () => setSelectedTab(undefined),
   });
+
   return (
     <div className={styles.root}>
       <div ref={controlsRef} className={styles.controls}>
@@ -43,7 +47,11 @@ export const Controls = () => {
             <button
               key={tab.category}
               className={`${styles.categoryButton} material-symbols-outlined`}
-              onClick={() => setSelectedTab(tab)}
+              onClick={() =>
+                setSelectedTab(
+                  selectedTab?.category === tab.category ? undefined : tab
+                )
+              }
             >
               {tab.icon}
             </button>

@@ -1,13 +1,12 @@
-import { Coordinate, Size } from '@types';
+import { Coordinate, Rotation, Size } from '@types';
 
 export interface Parcel {
   name: string;
-  sides: [number, number, number];
-  weight: number;
+  size: Size;
 }
 
 export type PlacedParcel = Parcel & {
-  // rotation: Rotation,
+  rotation: Rotation;
+  rotatedSize: Size;
   position: Coordinate;
-  size: Size;
 };

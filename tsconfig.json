@@ -27,7 +27,8 @@
       "@hooks": ["./src/hooks"],
       "@types": ["./src/types"],
       "@state": ["./src/state"],
-      "@packers": ["./src/packers"]
+      "@packers": ["./src/packers"],
+      "@utils": ["./src/utils"]
     }
   },
   "include": ["src"],

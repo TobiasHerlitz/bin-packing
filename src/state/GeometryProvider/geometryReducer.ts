@@ -1,3 +1,5 @@
+import { bestBin } from '@packers';
+
 import { GeometryState } from './GeometryContext';
 import { GeometryActions } from './GeometryDispatchContext';
 
@@ -8,10 +10,18 @@ export function geometryReducer(
   switch (action.type) {
     case 'addParcel': {
       state.parcels.push(action.payload);
-      return state;
+      return { ...state };
+    }
+    case 'setParcels': {
+      state.parcels = action.payload;
+      return { ...state };
+    }
+    case 'pack': {
+      const bin = bestBin(state.bins, state.parcels);
+      return { ...state, bins: [bin] };
     }
     default: {
-      throw Error('Unknown action: ' + action.type);
+      throw Error('Unknown action in geometryReducer');
     }
   }
 }

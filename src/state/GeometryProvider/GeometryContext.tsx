@@ -1,11 +1,11 @@
-import { Bin, Parcel, PlacedParcel } from '@types';
+import { Bin, Parcel } from '@types';
 import { createContext } from 'react';
 
 import { geometryInitialState } from './geometryInitialState';
 
 // State
 export interface GeometryState {
-  parcels: (Parcel | PlacedParcel)[];
+  parcels: Parcel[];
   bins: Bin[];
 }
 

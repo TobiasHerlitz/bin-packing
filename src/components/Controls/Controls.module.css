@@ -19,21 +19,28 @@
 }
 
 .body {
+  overflow-y: auto;
   height: 100vh;
-  backdrop-filter: blur(10px);
+  width: 500px;
+  backdrop-filter: blur(20px);
+  padding: calc(var(--gap) * 2);
 }
 
-.categoryButton {
+.tabs button {
   font-size: 50px;
   padding: calc(var(--gap) * 3) calc(var(--gap) * 0.5);
   backdrop-filter: blur(10px);
-  background-color: var(--primary-color-40);
-  color: var(--primary-color);
   border: none;
   border-radius: 8px 0 0 8px;
 }
 
-.categoryButton:hover {
-  background-color: var(--primary-color);
-  color: white;
+
+.tabs button:nth-child(2) {
+  background-color: var(--secondary-color-40);
+  color: var(--secondary-color);
+
+  &:hover {
+    background-color: var(--secondary-color);
+    color: white;
+  }
 }
