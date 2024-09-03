@@ -62,6 +62,7 @@ export const Parcels = ({ form }: ParcelsProps) => {
               {...register(`parcels.${index}.name`, { required: true })}
             />
             <button
+              type="button"
               className="material-symbols-outlined"
               onClick={(e) => {
                 e.stopPropagation();

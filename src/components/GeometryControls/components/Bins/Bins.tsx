@@ -63,6 +63,7 @@ export const Bins = ({ form }: BinsProps) => {
             />
             <button
               className="material-symbols-outlined"
+              type="button"
               disabled
               onClick={(e) => {
                 e.stopPropagation();

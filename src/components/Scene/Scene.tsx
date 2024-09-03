@@ -16,7 +16,6 @@ export const Scene = () => {
     console.warn('Failed');
   }
   const bin = bins[0];
-  console.log(bin.items.length);
   const placedParcels = bin.items.map((item, index) => (
     <Parcel
       name={item.name}
