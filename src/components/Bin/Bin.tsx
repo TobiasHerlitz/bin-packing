@@ -8,7 +8,7 @@ interface BinProps {
   parcels: ReactNode[];
 }
 
-export const Bin = ({ size, position, parcels }: BinProps) => {
+export const Bin = ({ size, position, parcels }) => {
   const { width, height, depth } = size;
   const { x, y, z } = position ?? { x: 0, y: height / 2, z: 0 };
   const color = '#6F8C90';
