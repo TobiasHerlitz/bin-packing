@@ -4,12 +4,9 @@ on:
   pull_request:
     branches:
       - main
-<<<<<<< HEAD
   push:
     branches:
       - main
-=======
->>>>>>> 54200ee (adding 'on' to workflow)
 
 jobs:
   install-dependencies:
