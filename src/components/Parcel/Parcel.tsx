@@ -1,4 +1,5 @@
 import { useStageDispatch, useStageState } from '@hooks';
+import { ThreeEvent } from '@react-three/fiber';
 import { Coordinate, Size } from '@types';
 
 interface ParcelProps {
@@ -18,21 +19,27 @@ export const Parcel = ({ size, position, color, name }: ParcelProps) => {
     sceneState.selectedParcel !== undefined &&
     name !== sceneState.selectedParcel;
 
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    if (name === sceneState.selectedParcel) {
+      sceneDispatch({ type: 'selectParcel', parcelName: undefined });
+      return;
+    }
+
+    sceneDispatch({ type: 'selectParcel', parcelName: name });
+  };
+
   return (
     <mesh
       onPointerMissed={() =>
         name === sceneState.selectedParcel &&
         sceneDispatch({ type: 'selectParcel', parcelName: undefined })
       }
-      onClick={(e) => {
-        e.stopPropagation();
-        sceneDispatch({ type: 'selectParcel', parcelName: name });
-      }}
+      onClick={handleClick}
       position={[x, y, z]}
     >
       <boxGeometry attach="geometry" args={[width, height, depth]} />
       <meshStandardMaterial wireframe={hideParcel} color={color || 'gray'} />
-      {/*right*/}
     </mesh>
   );
 };

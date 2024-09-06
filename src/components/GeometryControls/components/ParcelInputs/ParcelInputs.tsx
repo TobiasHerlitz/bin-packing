@@ -1,8 +1,9 @@
 import { Parcel } from '@types';
+import { Fragment } from 'react/jsx-runtime';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
 
 import { FormInputs } from '../../GeometryControls';
-import styles from './Parcels.module.css';
+import styles from './ParcelInputs.module.css';
 
 // Casting to unknown and later to Parcel is needed since useFieldArray does not allow empty appends/inserts
 const emptyParcelRow: unknown = {
@@ -18,7 +19,7 @@ interface ParcelsProps {
   form: UseFormReturn<FormInputs>;
 }
 
-export const Parcels = ({ form }: ParcelsProps) => {
+export const ParcelInputs = ({ form }: ParcelsProps) => {
   const { control, register } = form;
   const { fields, append, remove } = useFieldArray({
     control,
@@ -30,14 +31,17 @@ export const Parcels = ({ form }: ParcelsProps) => {
       <h3>Parcels</h3>
       <div className={styles.parcelsGrid}>
         {fields.map(({ id }, index) => (
-          <>
+          <Fragment key={id}>
             <input
               key={`${id}-width`}
               placeholder="Width"
               min="0"
               step="1"
               type="number"
-              {...register(`parcels.${index}.size.width`, { required: true })}
+              {...register(`parcels.${index}.size.width`, {
+                required: true,
+                valueAsNumber: true,
+              })}
             />
             <input
               key={`${id}-height`}
@@ -45,7 +49,10 @@ export const Parcels = ({ form }: ParcelsProps) => {
               min="0"
               step="1"
               type="number"
-              {...register(`parcels.${index}.size.height`, { required: true })}
+              {...register(`parcels.${index}.size.height`, {
+                required: true,
+                valueAsNumber: true,
+              })}
             />
             <input
               key={`${id}-depth`}
@@ -53,7 +60,10 @@ export const Parcels = ({ form }: ParcelsProps) => {
               min="0"
               step="1"
               type="number"
-              {...register(`parcels.${index}.size.depth`, { required: true })}
+              {...register(`parcels.${index}.size.depth`, {
+                required: true,
+                valueAsNumber: true,
+              })}
             />
             <input
               key={`${id}-name`}
@@ -71,7 +81,7 @@ export const Parcels = ({ form }: ParcelsProps) => {
             >
               delete
             </button>
-          </>
+          </Fragment>
         ))}
         <button
           className={`${styles.fullWidth} material-symbols-outlined`}

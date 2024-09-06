@@ -34,7 +34,6 @@
   border-radius: 8px 0 0 8px;
 }
 
-
 .tabs button:nth-child(2) {
   background-color: var(--secondary-color-40);
   color: var(--secondary-color);

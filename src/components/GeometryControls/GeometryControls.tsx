@@ -2,7 +2,7 @@ import { useGeometryDispatch, useGeometryState } from '@hooks';
 import { Bin, Parcel } from '@types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Bins, Parcels } from './components';
+import { BinInputs, ParcelInputs } from './components';
 import styles from './GeometryControls.module.css';
 
 export interface FormInputs {
@@ -35,9 +35,9 @@ export const GeometryControls = ({ closeControls }: GeometryControlsProps) => {
       <h2>Geometry Controls</h2>
       <hr />
       <form onSubmit={form.handleSubmit(pack)}>
-        <Parcels form={form} />
+        <ParcelInputs form={form} />
         <hr />
-        <Bins form={form} />
+        <BinInputs form={form} />
         <hr />
         <button className={styles.submitButton} type="submit">
           Pack

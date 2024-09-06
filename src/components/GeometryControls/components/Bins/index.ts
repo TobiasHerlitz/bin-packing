@@ -1,1 +1,0 @@
-export { Bins } from './Bins';
