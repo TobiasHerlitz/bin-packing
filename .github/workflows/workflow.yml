@@ -1,4 +1,10 @@
 name: code-checking
+
+on:
+  pull_request:
+    branches:
+      - main
+
 jobs:
   checks:
     name: my-job
