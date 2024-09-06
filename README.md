@@ -20,11 +20,10 @@
 
 ### TODOS
 - 🚧 Setup testing. Cypress, Jest, Mocha or other
-- 🚧 Setup accessibility testing. Add to pipeline
 - 🚧 Setup CI pipeline
 - ✅ Adjust linting rules
 - 🚧 Show type errors clearer
-- 🚧 Clicking a selected parcel should unselect
+- ✅ Clicking a selected parcel should unselect
 
 ## Terminology
 | Term     | Description                                                                     |
