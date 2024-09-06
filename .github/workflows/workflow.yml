@@ -4,10 +4,13 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   checks:
-    name: my-job
+    name: checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

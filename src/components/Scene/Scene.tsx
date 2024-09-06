@@ -25,7 +25,7 @@ export const Scene = () => {
       position={{
         x: (item.position.x + item.size.width / 2) / 100,
         y: (item.position.y + item.size.height / 2) / 100,
-        z: (item.position.z + item.size.depth / 2) / 100,
+        z: (item.position.z + item.size.depth / 2) / 100
       }}
     />
   ));
