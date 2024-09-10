@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "check:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@react-three/drei": "^9.111.2",
@@ -31,6 +32,7 @@
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
+    "@vitest/coverage-v8": "^2.0.5",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
