@@ -43,7 +43,7 @@ test('sorting bins', () => {
     },
   ]);
 
-  expect(sortedBins[0].name).toBe('BinThree');
+  expect(sortedBins[0].name).toBe('BLORP');
   expect(sortedBins[1].name).toBe('BinOne');
   expect(sortedBins[2].name).toBe('BinTwo');
   expect(sortedBins[3].name).toBe('BinFour');

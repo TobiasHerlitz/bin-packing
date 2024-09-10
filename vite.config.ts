@@ -20,10 +20,7 @@ export default defineConfig({
   test: {
     coverage: {
       reporter: ['text'], // Only report in cli
-      exclude: [
-        ...testDefaults.exclude,
-        '**/index.ts',
-      ]
+      exclude: [...testDefaults.exclude, '**/index.ts'],
     },
   },
 });

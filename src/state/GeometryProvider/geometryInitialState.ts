@@ -94,7 +94,6 @@ export const geometryInitialState: GeometryState = {
         height: 100,
         depth: 200,
       },
-      maxWeight: 100,
       items: exampleParcels,
     },
     // {
