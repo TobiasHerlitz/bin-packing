@@ -1,13 +1,7 @@
-import { Bin, Coordinate, Parcel, PlacedParcel, Rotation, Size } from '@types';
+import { Axis, Bin, Parcel, PlacedParcel, Rotation, Size } from '@types';
+import { axisToCoordinate, axisToSize, sortByVolume } from '@utils';
 
-import { sortBins } from './bin';
 import { getRotatedSize, sortParcels } from './parcel';
-
-enum Axis {
-  Width = 'Width',
-  Height = 'Height',
-  Depth = 'Depth',
-}
 
 const START_POSITION: Size = {
   width: 0,
@@ -15,20 +9,8 @@ const START_POSITION: Size = {
   depth: 0,
 };
 
-const axisToCoordinateMap: Record<Axis, keyof Coordinate> = {
-  [Axis.Width]: 'x',
-  [Axis.Height]: 'y',
-  [Axis.Depth]: 'z',
-};
-
-const axisToSizeMap: Record<Axis, keyof Size> = {
-  [Axis.Width]: 'width',
-  [Axis.Height]: 'height',
-  [Axis.Depth]: 'depth',
-};
-
 export function bestBin(bins: Bin[], items: Parcel[]) {
-  const sortedBins = sortBins(bins);
+  const sortedBins = sortByVolume(bins);
   const sortedParcels = sortParcels(items);
   // Call pack_to_bin on each bin with all items. OG returns array of unfitted items, easier to return null
   sortedBins.forEach((bin) => {
@@ -104,24 +86,22 @@ function rectIntersect(
   axisOne: Axis,
   axisTwo: Axis
 ) {
-  const binParcelSizeX = binParcel.rotatedSize[axisToSizeMap[axisOne]];
-  const binParcelSizeY = binParcel.rotatedSize[axisToSizeMap[axisTwo]];
-  const proposedParcelSizeX =
-    proposedParcel.rotatedSize[axisToSizeMap[axisOne]];
-  const proposedParcelSizeY =
-    proposedParcel.rotatedSize[axisToSizeMap[axisTwo]];
+  const binParcelSizeX = binParcel.rotatedSize[axisToSize[axisOne]];
+  const binParcelSizeY = binParcel.rotatedSize[axisToSize[axisTwo]];
+  const proposedParcelSizeX = proposedParcel.rotatedSize[axisToSize[axisOne]];
+  const proposedParcelSizeY = proposedParcel.rotatedSize[axisToSize[axisTwo]];
 
   const binParcelCenter = {
-    x: binParcel.position[axisToCoordinateMap[axisOne]] + binParcelSizeX / 2,
-    y: binParcel.position[axisToCoordinateMap[axisTwo]] + binParcelSizeY / 2,
+    x: binParcel.position[axisToCoordinate[axisOne]] + binParcelSizeX / 2,
+    y: binParcel.position[axisToCoordinate[axisTwo]] + binParcelSizeY / 2,
   };
 
   const proposedParcelCenter = {
     x:
-      proposedParcel.position[axisToCoordinateMap[axisOne]] +
+      proposedParcel.position[axisToCoordinate[axisOne]] +
       proposedParcelSizeX / 2,
     y:
-      proposedParcel.position[axisToCoordinateMap[axisTwo]] +
+      proposedParcel.position[axisToCoordinate[axisTwo]] +
       proposedParcelSizeY / 2,
   };
 

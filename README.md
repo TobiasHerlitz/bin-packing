@@ -20,7 +20,7 @@
 
 ### TODOS
 - 🚧 Setup testing. Cypress, Jest, Mocha or other
-- 🚧 Setup CI pipeline
+- ✅ Setup CI pipeline
 - ✅ Adjust linting rules
 - 🚧 Show type errors clearer
 - ✅ Clicking a selected parcel should unselect
@@ -57,3 +57,7 @@ The downside to this is that it obfuscates which parts of the JSX contains "actu
 
 ### Import order
 [eslint-plugin-import-order](https://github.com/import-js/eslint-plugin-import/issues/2948) seems to be in a bit of a state and doesn't support eslint v9 yet. Thats why I use [eslint-plugin-simple-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)
+
+
+### Tests
+Test file are co-located with the files that are tested

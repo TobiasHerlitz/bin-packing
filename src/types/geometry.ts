@@ -10,6 +10,12 @@ export interface Coordinate {
   z: number;
 }
 
+export enum Axis {
+  Width = 'Width',
+  Height = 'Height',
+  Depth = 'Depth',
+}
+
 export enum Rotation {
   WHD = 'WHD',
   HWD = 'HWD',

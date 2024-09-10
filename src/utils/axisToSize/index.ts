@@ -1,0 +1,1 @@
+export { axisToSize } from './axisToSize';
