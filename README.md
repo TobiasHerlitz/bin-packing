@@ -18,13 +18,6 @@
 - Uses vite
 - Uses [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) for fast Refresh
 
-### TODOS
-- 🚧 Setup testing. Cypress, Jest, Mocha or other
-- ✅ Setup CI pipeline
-- ✅ Adjust linting rules
-- 🚧 Show type errors clearer
-- ✅ Clicking a selected parcel should unselect
-
 ## Terminology
 | Term     | Description                                                                     |
 | ---------| ------------------------------------------------------------------------------- |
