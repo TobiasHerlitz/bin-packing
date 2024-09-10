@@ -28,7 +28,8 @@
       "@types": ["./src/types"],
       "@state": ["./src/state"],
       "@packers": ["./src/packers"],
-      "@utils": ["./src/utils"]
+      "@utils": ["./src/utils"],
+      "@ui": ["./src/ui"]
     }
   },
   "include": ["src"],

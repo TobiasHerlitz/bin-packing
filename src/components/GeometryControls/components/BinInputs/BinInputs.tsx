@@ -33,6 +33,12 @@ export const BinInputs = ({ form }: BinsProps) => {
         {fields.map(({ id }, index) => (
           <Fragment key={id}>
             <input
+              key={`${id}-name`}
+              placeholder="Name"
+              type="text"
+              {...register(`bins.${index}.name`)}
+            />
+            <input
               key={`${id}-width`}
               placeholder="Width"
               min="0"
@@ -57,12 +63,6 @@ export const BinInputs = ({ form }: BinsProps) => {
               step="1"
               type="number"
               {...register(`bins.${index}.size.depth`, { valueAsNumber: true })}
-            />
-            <input
-              key={`${id}-name`}
-              placeholder="Name"
-              type="text"
-              {...register(`bins.${index}.name`)}
             />
             <button
               className="material-symbols-outlined"

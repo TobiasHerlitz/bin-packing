@@ -1,4 +1,5 @@
 import { useStageDispatch, useStageState } from '@hooks';
+import { Toggle } from '@ui';
 
 import styles from './StageControls.module.css';
 
@@ -11,6 +12,10 @@ export const StageControls = () => {
       <div className={styles.actions}>
         <span>
           <label htmlFor="toggleGrid">Show grid</label>
+          <Toggle
+            isEnabled={stageState.showGrid}
+            onChange={() => stageDispatch({ type: 'toggleGrid' })}
+          />
           <input
             type="checkbox"
             id="toggleGrid"

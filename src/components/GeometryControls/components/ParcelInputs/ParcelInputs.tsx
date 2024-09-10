@@ -33,6 +33,12 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
         {fields.map(({ id }, index) => (
           <Fragment key={id}>
             <input
+              key={`${id}-name`}
+              placeholder="Name"
+              type="text"
+              {...register(`parcels.${index}.name`, { required: true })}
+            />
+            <input
               key={`${id}-width`}
               placeholder="Width"
               min="0"
@@ -64,12 +70,6 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
                 required: true,
                 valueAsNumber: true,
               })}
-            />
-            <input
-              key={`${id}-name`}
-              placeholder="Name"
-              type="text"
-              {...register(`parcels.${index}.name`, { required: true })}
             />
             <button
               type="button"
