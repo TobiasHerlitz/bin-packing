@@ -7,13 +7,13 @@ const exampleParcels = [
     name: 'ItemOne',
     size: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 50,
     },
     rotation: Rotation.WHD,
     rotatedSize: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 50,
     },
     position: {
@@ -45,13 +45,13 @@ const exampleParcels = [
     name: 'ItemThree',
     size: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 100,
     },
     rotation: Rotation.WHD,
     rotatedSize: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 100,
     },
     position: {
@@ -64,13 +64,13 @@ const exampleParcels = [
     name: 'ItemFour',
     size: {
       width: 70,
-      height: 20,
+      height: 40,
       depth: 30,
     },
     rotation: Rotation.WHD,
     rotatedSize: {
       width: 70,
-      height: 20,
+      height: 40,
       depth: 30,
     },
     position: {

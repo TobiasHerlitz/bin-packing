@@ -1,4 +1,4 @@
-import { bestBin } from '@packers';
+import { bestBin, multipleContainersMinimizeCost } from '@packers';
 
 import { GeometryState } from './GeometryContext';
 import { GeometryActions } from './GeometryDispatchContext';
@@ -17,7 +17,9 @@ export function geometryReducer(
       return { ...state };
     }
     case 'pack': {
-      const bin = bestBin(state.bins, state.parcels);
+      console.log('PACKING');
+      // const bin = bestBin(state.bins, state.parcels);
+      const bin = multipleContainersMinimizeCost(state.bins, state.parcels);
       return { ...state, bins: [bin] };
     }
     default: {

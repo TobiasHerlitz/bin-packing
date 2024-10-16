@@ -29,7 +29,8 @@
       "@state": ["./src/state"],
       "@packers": ["./src/packers"],
       "@utils": ["./src/utils"],
-      "@ui": ["./src/ui"]
+      "@ui": ["./src/ui"],
+      "@style": ["./src/style"]
     }
   },
   "include": ["src"],

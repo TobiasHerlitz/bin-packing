@@ -62,7 +62,19 @@ p {
   margin: var(--gap) 0;
 }
 
+/*button {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 100px;
+}*/
+
 button {
+  background: red;
+}
+
+/*button {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -76,7 +88,7 @@ button {
 button:hover {
   color: white;
   background: var(--primary-color);
-}
+}*/
 
 input {
   box-sizing: border-box;
