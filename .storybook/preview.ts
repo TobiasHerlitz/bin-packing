@@ -1,10 +1,12 @@
 // .storybook/preview.ts
+import '../src/style/global.css';
+
 import type { Preview } from '@storybook/react';
-import '@style/global.css';
 
 const preview: Preview = {
   parameters: {
     controls: {
+      disableSaveFromUI: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,

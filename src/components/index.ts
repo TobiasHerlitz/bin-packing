@@ -7,5 +7,5 @@ export { Parcel } from './Parcel';
 export { RoutingRoot } from './RoutingRoot';
 export { Scene } from './Scene';
 export { SceneHelpers } from './SceneHelpers';
-export { StageControls } from './StageControls';
 export { SelectedOverlay } from './SelectedOverlay';
+export { StageControls } from './StageControls';

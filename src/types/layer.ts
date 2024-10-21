@@ -1,7 +1,7 @@
-import { PlacedParcel } from "./parcel"
+import { PlacedParcel } from './parcel';
 
-export type Layer = {
-  width: number,
-  depth: number,
-  parcels: PlacedParcel[]
+export interface Layer {
+  width: number;
+  depth: number;
+  parcels: PlacedParcel[];
 }

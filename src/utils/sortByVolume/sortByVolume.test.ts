@@ -7,6 +7,7 @@ test('sorting bins', () => {
   const sortedBins = sortByVolume([
     {
       name: 'BinOne',
+      cost: 0,
       size: {
         width: 20,
         height: 20,
@@ -16,6 +17,7 @@ test('sorting bins', () => {
     },
     {
       name: 'BinTwo',
+      cost: 0,
       size: {
         width: 20,
         height: 10,
@@ -25,6 +27,7 @@ test('sorting bins', () => {
     },
     {
       name: 'BinThree',
+      cost: 0,
       size: {
         width: 400,
         height: 10,
@@ -34,6 +37,7 @@ test('sorting bins', () => {
     },
     {
       name: 'BinFour',
+      cost: 0,
       size: {
         width: 20,
         height: 10,

@@ -1,5 +1,5 @@
 import { useStageDispatch, useStageState } from '@hooks';
-import { Toggle } from '@ui';
+import { Button, ButtonSize, Toggle } from '@ui';
 
 import styles from './StageControls.module.css';
 
@@ -10,25 +10,34 @@ export const StageControls = () => {
     <div className={styles.root}>
       <h2>Stage Controls</h2>
       <div className={styles.actions}>
-        <span>
-          <label htmlFor="toggleGrid">Show grid</label>
-          <Toggle
-            isEnabled={stageState.showGrid}
-            onChange={() => stageDispatch({ type: 'toggleGrid' })}
-          />
-          <input
-            type="checkbox"
-            id="toggleGrid"
-            name="toggleGrid"
-            checked={stageState.showGrid}
-            onChange={() => stageDispatch({ type: 'toggleGrid' })}
-          />
-        </span>
-        <span>
-          <button onClick={() => stageState.cameraRef?.current?.reset()}>
-            Reset viewpoint
-          </button>
-        </span>
+        <Toggle
+          className={styles.toggle}
+          id="toggleScene"
+          checked={stageState.showScene}
+          onChange={() => stageDispatch({ type: 'toggleScene' })}
+        >
+          Show scene
+        </Toggle>
+        {stageState.showScene && (
+          <>
+            <Toggle
+              className={styles.toggle}
+              id="toggleGrid"
+              checked={stageState.showGrid}
+              onChange={() => stageDispatch({ type: 'toggleGrid' })}
+            >
+              Show grid
+            </Toggle>
+            <div className={styles.buttonRow}>
+              <span>Reset camera</span>
+              <Button
+                size={ButtonSize.Small}
+                icon="restart_alt"
+                onClick={() => stageState.cameraRef?.current?.reset()}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

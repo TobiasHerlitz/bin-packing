@@ -1,9 +1,16 @@
 /* Variables for the light color theme  */
 :root, [color-theme="light"] {
-  --bg-color: #F5F5F5;
-  --primary-color: #3C3C6B;
-  --secondary-color: #6B3C3C;
-  --tertiary-color: #3C6B3C;
+  --bg-color: #1B263B;
+  --primary-color-1: #344B67;
+  --primary-color-2: #456489;
+  --primary-color-3: #607DA0;
+  --secondary-color-1: #FF6F00;
+  --secondary-color-2: #FF8C33;
+  --secondary-color-3: #FFA966;
+  --tertiary-color-1: #C1D82F;
+  --tertiary-color-2: #C7D85B;
+  --font-color: #F5F5F5;
+  --disabled-color: #838383;
 }
 
 /* Variables for the dark color theme  */
@@ -15,20 +22,27 @@
 
 :root {
   --gap: 8px;
-  --primary-color-80: color-mix(in oklab, var(--primary-color) 80%, transparent);
-  --primary-color-60: color-mix(in oklab, var(--primary-color) 60%, transparent);
-  --primary-color-40: color-mix(in oklab, var(--primary-color) 40%, transparent);
+  --gap-1_5: calc(var(--gap) * 1.5);
+  --gap-2: calc(var(--gap) * 2);
+  --gap-2_5: calc(var(--gap) * 2.5);
+  --gap-3: calc(var(--gap) * 3);
+  --gap-3_5: calc(var(--gap) * 3.5);
+  --gap-4: calc(var(--gap) * 4);
+/*
+  --primary-color-80: color-mix(in oklab, var(--primary-color-1) 80%, transparent);
+  --primary-color-60: color-mix(in oklab, var(--primary-color-1) 60%, transparent);
+  --primary-color-40: color-mix(in oklab, var(--primary-color-1) 40%, transparent);
 
-  --secondary-color-80: color-mix(in oklab, var(--secondary-color) 80%, transparent);
-  --secondary-color-60: color-mix(in oklab, var(--secondary-color) 60%, transparent);
-  --secondary-color-40: color-mix(in oklab, var(--secondary-color) 40%, transparent);
+  --secondary-color-80: color-mix(in oklab, var(--secondary-color-1) 80%, transparent);
+  --secondary-color-60: color-mix(in oklab, var(--secondary-color-1) 60%, transparent);
+  --secondary-color-40: color-mix(in oklab, var(--secondary-color-1) 40%, transparent);
 
-  --tertiary-color-80: color-mix(in oklab, var(--tertiary-color) 80%, transparent);
-  --tertiary-color-60: color-mix(in oklab, var(--tertiary-color) 60%, transparent);
-  --tertiary-color-40: color-mix(in oklab, var(--tertiary-color) 40%, transparent);
-
-  background: var(--bg-color);
-  color: var(--primary-color);
+  --tertiary-color-80: color-mix(in oklab, var(--tertiary-color-1) 80%, transparent);
+  --tertiary-color-60: color-mix(in oklab, var(--tertiary-color-1) 60%, transparent);
+  --tertiary-color-40: color-mix(in oklab, var(--tertiary-color-1) 40%, transparent);
+*/
+  background: var(--primary-color-1);
+  color: var(--font-color);
 }
 
 html {
@@ -50,6 +64,9 @@ h1 {
 }
 
 h2 {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
   margin: 0;
 }
 
@@ -62,32 +79,25 @@ p {
   margin: var(--gap) 0;
 }
 
-/*button {
+label, button {
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-  font-size: 100px;
-}*/
-
-button {
-  background: red;
+/*  font-optical-sizing: auto;*/
 }
 
 /*button {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--primary-color);
-  background: var(--primary-color-40);
+  color: var(--primary-color-1);
+  background: var(--primary-color-2);
   padding: var(--gap);
-  border: solid 2px var(--primary-color);
+  border: solid 2px var(--primary-color-1);
   border-radius: 8px;
 }
 
 button:hover {
   color: white;
-  background: var(--primary-color);
+  background: var(--primary-color-1);
 }*/
 
 input {

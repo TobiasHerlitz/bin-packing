@@ -1,4 +1,5 @@
 import { useGeometryState, useStageState } from '@hooks';
+
 import styles from './SelectedOverlay.module.css';
 
 export const SelectedOverlay = () => {
@@ -9,7 +10,9 @@ export const SelectedOverlay = () => {
     return null;
   }
 
-  const selectedParcel = geometryState.bins[0].items.find((parcel) => parcel.name === stageState.selectedParcel)
+  const selectedParcel = geometryState.bins[0].items.find(
+    (parcel) => parcel.name === stageState.selectedParcel
+  );
 
   if (!selectedParcel) {
     console.error('Could not find selected parcel');
@@ -23,5 +26,5 @@ export const SelectedOverlay = () => {
       <span>Height: {selectedParcel.size.height}</span>
       <span>Depth: {selectedParcel.size.depth}</span>
     </div>
-  )
-}
+  );
+};

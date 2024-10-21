@@ -6,6 +6,7 @@ import { stageInitialState } from './stageInitialState';
 // State
 export interface StageState {
   showGrid: boolean;
+  showScene: boolean;
   selectedParcel?: string;
   cameraRef?: MutableRefObject<CameraControls | null>;
 }

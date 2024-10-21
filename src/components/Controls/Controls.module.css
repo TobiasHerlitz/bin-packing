@@ -21,25 +21,26 @@
 .body {
   overflow-y: auto;
   height: 100vh;
-  width: 500px;
-  backdrop-filter: blur(20px);
-  padding: calc(var(--gap) * 2);
+  width: 300px;
+/*  backdrop-filter: blur(20px);*/
+  background: var(--bg-color);
+  padding: var(--gap-2);
 }
 
 .tabs button {
   font-size: 50px;
-  padding: calc(var(--gap) * 3) calc(var(--gap) * 0.5);
+  padding: var(--gap-3) calc(var(--gap) * 0.5);
   backdrop-filter: blur(10px);
   border: none;
   border-radius: 8px 0 0 8px;
 }
 
 .tabs button:nth-child(2) {
-  background-color: var(--secondary-color-40);
-  color: var(--secondary-color);
+  background-color: var(--secondary-color-3);
+  color: var(--secondary-color-1);
 
   &:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color-1);
     color: white;
   }
 }

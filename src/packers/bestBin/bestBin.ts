@@ -38,6 +38,7 @@ function putParcel(
 
   Object.values(Rotation).some((rotation) => {
     const proposedParcel: PlacedParcel = {
+      id: item.id,
       name: item.name,
       size: item.size,
       rotation: rotation,
