@@ -15,6 +15,7 @@ export const buildLayer = (layer: Layer, parcels: Parcel[], x = 0, z = 0) => {
     return layer;
   }
 
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < parcels.length; ++i) {
     if (placeParcel(layer, parcels[i], x, z)) {
       const remainingParcels = parcels.filter(
