@@ -5,4 +5,5 @@ export interface Bin {
   name: string;
   size: Size;
   items: PlacedParcel[];
+  cost: number;
 }

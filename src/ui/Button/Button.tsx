@@ -1,0 +1,48 @@
+import styles from './Button.module.css';
+import { ButtonColor, ButtonSize } from './Button.types';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  disabled?: boolean;
+  text?: string;
+  size?: ButtonSize;
+  colorScheme?: ButtonColor;
+  icon?: string;
+}
+
+const buttonSizeToClass: Record<ButtonSize, string> = {
+  [ButtonSize.Small]: styles.small,
+  [ButtonSize.Medium]: styles.medium,
+  [ButtonSize.Large]: styles.large,
+};
+
+const buttonColorToClass: Record<ButtonColor, string> = {
+  [ButtonColor.Primary]: styles.primaryColor,
+  [ButtonColor.Secondary]: styles.secondaryColor,
+};
+
+export const Button = ({
+  disabled = false,
+  text,
+  size = ButtonSize.Small,
+  colorScheme = ButtonColor.Primary,
+  icon = 'add',
+  ...props
+}: ButtonProps) => {
+  const colorClass = disabled
+    ? styles.disabled
+    : buttonColorToClass[colorScheme];
+  const sizeClass = buttonSizeToClass[size];
+  return (
+    <button
+      className={`${styles.button} ${colorClass} ${sizeClass}`}
+      {...props}
+    >
+      {size !== ButtonSize.Small && <span>{text}</span>}
+      {size !== ButtonSize.Large && (
+        <span className={`${styles.icon} material-symbols-outlined`}>
+          {icon}
+        </span>
+      )}
+    </button>
+  );
+};

@@ -13,12 +13,12 @@
   }
 
   hr {
-    margin: calc(var(--gap) * 2) 0;
+    margin: var(--gap-2) 0;
   }
 }
 
 .submitButton {
   margin-top: auto;
-  padding: calc(var(--gap) * 1.5);
+  padding: var(--gap-1_5);
   width: 100%;
 }

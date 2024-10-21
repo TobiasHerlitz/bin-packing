@@ -1,19 +1,20 @@
 import { Rotation } from '@types';
+import { v4 as UUIDv4 } from 'uuid';
 
 import { GeometryState } from './GeometryContext';
-
 const exampleParcels = [
   {
+    id: UUIDv4(),
     name: 'ItemOne',
     size: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 50,
     },
     rotation: Rotation.WHD,
     rotatedSize: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 50,
     },
     position: {
@@ -23,6 +24,7 @@ const exampleParcels = [
     },
   },
   {
+    id: UUIDv4(),
     name: 'ItemTwo',
     size: {
       width: 20,
@@ -42,16 +44,17 @@ const exampleParcels = [
     },
   },
   {
+    id: UUIDv4(),
     name: 'ItemThree',
     size: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 100,
     },
     rotation: Rotation.WHD,
     rotatedSize: {
       width: 40,
-      height: 20,
+      height: 40,
       depth: 100,
     },
     position: {
@@ -61,16 +64,17 @@ const exampleParcels = [
     },
   },
   {
+    id: UUIDv4(),
     name: 'ItemFour',
     size: {
       width: 70,
-      height: 20,
+      height: 40,
       depth: 30,
     },
     rotation: Rotation.WHD,
     rotatedSize: {
       width: 70,
-      height: 20,
+      height: 40,
       depth: 30,
     },
     position: {
@@ -82,13 +86,15 @@ const exampleParcels = [
 ];
 
 export const geometryInitialState: GeometryState = {
-  parcels: exampleParcels.map(({ name, size }) => ({
+  parcels: exampleParcels.map(({ id, name, size }) => ({
+    id,
     name,
     size,
   })),
   bins: [
     {
       name: 'BinOne',
+      cost: 400,
       size: {
         width: 100,
         height: 100,

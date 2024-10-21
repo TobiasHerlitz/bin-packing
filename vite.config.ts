@@ -16,6 +16,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
     host: true, // Needed to run in docker
+    port: 8000,
   },
   test: {
     coverage: {

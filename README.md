@@ -21,7 +21,7 @@
 ## Terminology
 | Term     | Description                                                                     |
 | ---------| ------------------------------------------------------------------------------- |
-| scene    | Everything visible on the screen, consists of geometry and scene                |
+| scene    | Everything visible on the screen, consists of geometry and stage                |
 | stage    | Matters concerning visual representation. Lighting, camera, scene helpers, etc. |
 | geometry | The physical bodies rendered in the scene                                       |
 | bin      | A physical body that holds parcels                                              |

@@ -17,7 +17,9 @@ export function geometryReducer(
       return { ...state };
     }
     case 'pack': {
+      console.log('PACKING');
       const bin = bestBin(state.bins, state.parcels);
+      // const bin = multipleContainersMinimizeCost(state.bins, state.parcels);
       return { ...state, bins: [bin] };
     }
     default: {

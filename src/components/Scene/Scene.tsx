@@ -1,5 +1,5 @@
 import { Bin, Parcel, SceneHelpers } from '@components';
-import { useGeometryState, useStageDispatch } from '@hooks';
+import { useGeometryState, useStageDispatch, useStageState } from '@hooks';
 import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { sizeToMeters } from '@utils';
@@ -11,6 +11,7 @@ export const Scene = () => {
   const cameraRef = useRef(null);
   const parcelColors = ['#001B2E', '#294C60', '#ADB6C4', '#FFEFD3', '#FFC49B'];
   const { bins } = useGeometryState();
+  const { showScene } = useStageState();
   const stageDispatch = useStageDispatch();
   if (!bins[0] || !bins[0].items) {
     console.warn('Failed');
@@ -35,6 +36,10 @@ export const Scene = () => {
 
     stageDispatch({ type: 'setCameraRef', cameraRef });
   }, [cameraRef, stageDispatch]);
+
+  if (!showScene) {
+    return null;
+  }
 
   return (
     <div className={styles.canvasWrapper}>

@@ -4,8 +4,24 @@
 }
 
 .actions {
-  margin-top: calc(var(--gap) * 4);
+  margin-top: var(--gap-4);
   display: flex;
   flex-direction: column;
-  gap: var(--gap);
+/*  align-items: end;*/
+  gap: var(--gap-2);
+}
+
+.toggle {
+/*  width: 100%;*/
+/*  padding-left: var(--gap-2);*/
+}
+
+.buttonRow {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
 }

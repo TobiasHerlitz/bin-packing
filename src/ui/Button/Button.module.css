@@ -1,0 +1,66 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  border-radius: 100px;
+  text-transform: uppercase;
+  gap: var(--gap-2);
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--font-color);
+  width: fit-content;
+}
+
+.small {
+  padding: calc(var(--gap) * 0.5);
+}
+
+.medium {
+  font-size: 16px;
+  padding: calc(var(--gap) * 1);
+  padding-left: var(--gap-2);
+}
+
+.large {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 24px;
+  padding: var(--gap-1_5);
+}
+
+.icon {
+  border: 3px solid white;
+  border-radius: 50px;
+  color: white;
+  font-size: 20px;
+}
+
+.disabled {
+  background: var(--disabled-color);
+  cursor: not-allowed;
+
+  /* Needed to prevent background jank when moving from disabled -> not disabled */
+  background-position:50% 50%;
+}
+
+.primaryColor {
+  background: radial-gradient(ellipse farthest-side at right bottom, var(--primary-color-2) 70%, var(--primary-color-1) 98%);
+  background-size: 200% 200%;
+  transition: background-position 0.2s ease-in-out;
+  transition-delay: 50ms;
+  background-position:50% 50%;
+}
+
+.secondaryColor {
+  background: radial-gradient(ellipse farthest-side at right bottom, var(--secondary-color-3) 70%, var(--secondary-color-1) 98%);
+  background-size: 200% 200%;
+  transition: background-position 0.2s ease-in-out;
+  transition-delay: 50ms;
+  background-position:50% 50%;
+}
+
+.primaryColor:hover, .secondaryColor:hover {
+    background-position: 0% 0%;
+}
