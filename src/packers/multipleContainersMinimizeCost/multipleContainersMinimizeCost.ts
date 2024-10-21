@@ -1,26 +1,30 @@
-import { Bin, Layer, Parcel } from "@types";
-import { buildLayer } from "./buildLayer";
+import { Bin, Parcel } from '@types';
 
-export const multipleContainersMinimizeCost = (bins: Bin[], parcels: Parcel[]) => {
-// Linear Integer Programming (LIP):
-// Formulate problem using linear integer programming. Represent containers and how boxes are packed.
+import { buildLayer } from './buildLayer';
 
-// 1. Compute the total cost of all selected packing patterns
+export const multipleContainersMinimizeCost = (
+  bins: Bin[],
+  parcels: Parcel[]
+) => {
+  // Linear Integer Programming (LIP):
+  // Formulate problem using linear integer programming. Represent containers and how boxes are packed.
+
+  // 1. Compute the total cost of all selected packing patterns
   // min(getTotalCost(something))
-// 2. Ensures that the selected packing patterns have sufficient space to pack the boxes of each type
-  // 
-// 3. 
+  // 2. Ensures that the selected packing patterns have sufficient space to pack the boxes of each type
+  //
+  // 3.
 
-// Column Generation Heuristic:
-// Generate possible loading column patterns that can packed together in a container. Evaluate packing configurations to minimize costs.
+  // Column Generation Heuristic:
+  // Generate possible loading column patterns that can packed together in a container. Evaluate packing configurations to minimize costs.
 
-// Selection of Optimal Patterns:
-// Chose patterns based on both packing efficiency and cost minimization while refining the solution.
+  // Selection of Optimal Patterns:
+  // Chose patterns based on both packing efficiency and cost minimization while refining the solution.
   const layer = buildLayer(
     {
       width: bins[0].size.width,
       depth: bins[0].size.depth,
-      parcels: []
+      parcels: [],
     },
     parcels
   );
@@ -28,19 +32,21 @@ export const multipleContainersMinimizeCost = (bins: Bin[], parcels: Parcel[]) =
   bins[0].items = layer.parcels;
 
   return bins[0];
-}
+};
 
 /**
  * Gets total cost of a given solution (array of bins)
  */
-const getTotalCost = (bins: Bin[]) => {
+export const getTotalCost = (bins: Bin[]) => {
   return bins.reduce((carry, bin) => carry + bin.cost, 0);
-}
+};
 
-const allParcelsPlaced = (bins: Bin[], parcels: Parcel[]) => {
+export const allParcelsPlaced = (bins: Bin[], parcels: Parcel[]) => {
   const allPlacedItems = bins.map(({ items }) => items).flat();
 
-  const allItemsPlaced = parcels.every((parcel) => allPlacedItems.some((placedItem) => placedItem.id === parcel.id));
+  const allItemsPlaced = parcels.every((parcel) =>
+    allPlacedItems.some((placedItem) => placedItem.id === parcel.id)
+  );
 
   if (!allItemsPlaced) {
     console.error('At least some parcels are not placed');
@@ -48,8 +54,7 @@ const allParcelsPlaced = (bins: Bin[], parcels: Parcel[]) => {
   }
 
   return false;
-}
-
+};
 
 // P -> packingPatterns - For single containers
 // p -> packingPattern - For a single container

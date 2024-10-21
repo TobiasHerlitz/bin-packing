@@ -4,7 +4,7 @@ boxes are equal height. The layers are then placed vertically (1D bin packing pr
 Dimensions can be assigned arbitrarily. w, h, d. Depth is parallell to the x axis
 */
 
-import { Layer, Parcel, PlacedParcel, Rotation } from "@types"
+import { Layer, Parcel, PlacedParcel, Rotation } from '@types';
 
 // x: pivot.width,
 // y: pivot.height,
@@ -12,16 +12,17 @@ import { Layer, Parcel, PlacedParcel, Rotation } from "@types"
 
 export const buildLayer = (layer: Layer, parcels: Parcel[], x = 0, z = 0) => {
   if (parcels.length === 0) {
-    return layer
-  };
-
+    return layer;
+  }
 
   for (let i = 0; i < parcels.length; ++i) {
     if (placeParcel(layer, parcels[i], x, z)) {
-      const remainingParcels = parcels.filter((remainingParcel) => remainingParcel !== parcels[i]);
+      const remainingParcels = parcels.filter(
+        (remainingParcel) => remainingParcel !== parcels[i]
+      );
 
-      buildLayer(layer, remainingParcels, x + parcels[i].size.width, z)
-      buildLayer(layer, remainingParcels, x, z + parcels[i].size.depth)
+      buildLayer(layer, remainingParcels, x + parcels[i].size.width, z);
+      buildLayer(layer, remainingParcels, x, z + parcels[i].size.depth);
       break;
     }
   }
@@ -36,7 +37,7 @@ export const buildLayer = (layer: Layer, parcels: Parcel[], x = 0, z = 0) => {
   // })
 
   return layer;
-}
+};
 
 const placeParcel = (layer: Layer, parcel: Parcel, x: number, z: number) => {
   const proposedParcel: PlacedParcel = {
@@ -56,19 +57,30 @@ const placeParcel = (layer: Layer, parcel: Parcel, x: number, z: number) => {
     return false;
   }
 
-  layer.parcels.push(proposedParcel)
+  layer.parcels.push(proposedParcel);
   return true;
-}
+};
 
-const canPlaceParcel = (layer: Layer, proposedParcel: PlacedParcel, x: number, z: number) => {
-  if (x + proposedParcel.size.width > layer.width || z + proposedParcel.size.depth > layer.depth) {
+const canPlaceParcel = (
+  layer: Layer,
+  proposedParcel: PlacedParcel,
+  x: number,
+  z: number
+) => {
+  if (
+    x + proposedParcel.size.width > layer.width ||
+    z + proposedParcel.size.depth > layer.depth
+  ) {
     return false;
   }
 
-  return layer.parcels.every((placedParcel) => !(
-    x + proposedParcel.size.width <= placedParcel.position.x ||
-    x >= placedParcel.position.x + placedParcel.size.width) ||
-    z + proposedParcel.size.depth <= placedParcel.position.z ||
-    z >= placedParcel.position.z + placedParcel.size.height
+  return layer.parcels.every(
+    (placedParcel) =>
+      !(
+        x + proposedParcel.size.width <= placedParcel.position.x ||
+        x >= placedParcel.position.x + placedParcel.size.width
+      ) ||
+      z + proposedParcel.size.depth <= placedParcel.position.z ||
+      z >= placedParcel.position.z + placedParcel.size.height
   );
-}
+};
