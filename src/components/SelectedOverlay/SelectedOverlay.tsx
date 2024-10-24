@@ -20,11 +20,26 @@ export const SelectedOverlay = () => {
   }
 
   return (
-    <div className={styles.root}>
-      <span>Name: {selectedParcel.name}</span>
-      <span>Width: {selectedParcel.size.width}</span>
-      <span>Height: {selectedParcel.size.height}</span>
-      <span>Depth: {selectedParcel.size.depth}</span>
+    <div className={styles.selectedOverlay}>
+      <h3>Selected parcel</h3>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>WIDTH</th>
+            <th>HEIGHT</th>
+            <th>DEPTH</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{selectedParcel.name}</td>
+            <td>{selectedParcel.size.width}</td>
+            <td>{selectedParcel.size.height}</td>
+            <td>{selectedParcel.size.depth}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
