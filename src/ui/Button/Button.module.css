@@ -13,25 +13,35 @@
 }
 
 .small {
-  padding: calc(var(--gap) * 0.5);
+  height: 34px;
+  width: 34px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 24px;
+  }
 }
 
 .medium {
-  font-size: 16px;
-  padding: calc(var(--gap) * 1);
-  padding-left: var(--gap-2);
+  font-size: 14px;
+  padding: calc(var(--gap) * 0.5);
+  padding-left: var(--gap-1_5);
 }
 
 .large {
   display: flex;
   justify-content: center;
+  padding: var(--gap);
   width: 100%;
-  font-size: 24px;
-  padding: var(--gap-1_5);
+  font-size: 20px;
 }
 
 .icon {
-  border: 3px solid white;
+  border: 2px solid white;
+  padding: 2px;
   border-radius: 50px;
   color: white;
   font-size: 20px;
@@ -49,18 +59,27 @@
   background: radial-gradient(ellipse farthest-side at right bottom, var(--primary-color-2) 70%, var(--primary-color-1) 98%);
   background-size: 200% 200%;
   transition: background-position 0.2s ease-in-out;
-  transition-delay: 50ms;
+  transition-delay: 20ms;
   background-position:50% 50%;
 }
 
 .secondaryColor {
-  background: radial-gradient(ellipse farthest-side at right bottom, var(--secondary-color-3) 70%, var(--secondary-color-1) 98%);
+  background: radial-gradient(ellipse farthest-side at right bottom, var(--secondary-color-3) 70%, var(--secondary-color-2) 98%);
   background-size: 200% 200%;
   transition: background-position 0.2s ease-in-out;
-  transition-delay: 50ms;
+  transition-delay: 20ms;
   background-position:50% 50%;
+}
+
+.bgcolor {
+  border: 2px solid var(--font-color);
+  background: var(--bg-color);
 }
 
 .primaryColor:hover, .secondaryColor:hover {
     background-position: 0% 0%;
+}
+
+.bgcolor:hover {
+    background: var(--primary-color-1);
 }

@@ -18,6 +18,7 @@ const buttonSizeToClass: Record<ButtonSize, string> = {
 const buttonColorToClass: Record<ButtonColor, string> = {
   [ButtonColor.Primary]: styles.primaryColor,
   [ButtonColor.Secondary]: styles.secondaryColor,
+  [ButtonColor.BGColor]: styles.bgcolor,
 };
 
 export const Button = ({
@@ -25,6 +26,7 @@ export const Button = ({
   text,
   size = ButtonSize.Small,
   colorScheme = ButtonColor.Primary,
+  className,
   icon = 'add',
   ...props
 }: ButtonProps) => {
@@ -34,12 +36,14 @@ export const Button = ({
   const sizeClass = buttonSizeToClass[size];
   return (
     <button
-      className={`${styles.button} ${colorClass} ${sizeClass}`}
+      className={`${styles.button} ${colorClass} ${sizeClass} ${className}`}
       {...props}
     >
       {size !== ButtonSize.Small && <span>{text}</span>}
       {size !== ButtonSize.Large && (
-        <span className={`${styles.icon} material-symbols-outlined`}>
+        <span
+          className={`${size === ButtonSize.Small ? styles.iconSmall : styles.icon} material-symbols-outlined`}
+        >
           {icon}
         </span>
       )}

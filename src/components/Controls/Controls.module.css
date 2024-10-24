@@ -8,7 +8,18 @@
   height: 100vh;
 }
 
+.hideControls {
+  margin-top: var(--gap-2);
+}
+
+.showControls {
+  position: relative;
+  padding: var(--gap-2);
+  height: 100%;
+}
+
 .controls {
+  height: 100%;
   position: relative;
   display: flex;
 }
@@ -16,15 +27,15 @@
 .tabs {
   display: flex;
   flex-direction: column;
+  margin-top: var(--gap-2);
 }
 
 .body {
-  overflow-y: auto;
-  height: 100vh;
-  width: 300px;
-/*  backdrop-filter: blur(20px);*/
+  border-radius: 12px;
+  height: 100%;
   background: var(--bg-color);
-  padding: var(--gap-2);
+  padding: var(--gap-3);
+  padding-top: var(--gap-4);
 }
 
 .tabs button {
@@ -32,15 +43,27 @@
   padding: var(--gap-3) calc(var(--gap) * 0.5);
   backdrop-filter: blur(10px);
   border: none;
-  border-radius: 8px 0 0 8px;
+  border-radius: 12px 0 0 12px;
+  margin-top: var(--gap);
+  cursor: pointer;
 }
 
-.tabs button:nth-child(2) {
+.tabs button:nth-child(1) {
   background-color: var(--secondary-color-3);
-  color: var(--secondary-color-1);
+  color: var(--font-color);
 
   &:hover {
     background-color: var(--secondary-color-1);
-    color: white;
+    color: var(--font-color);
+  }
+}
+
+.tabs button:nth-child(2) {
+  background-color: var(--tertiary-color-3);
+  color: var(--font-color);
+
+  &:hover {
+    background-color: var(--tertiary-color-1);
+    color: var(--font-color);
   }
 }

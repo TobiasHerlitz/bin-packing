@@ -2,7 +2,7 @@ export { Bin } from './Bin';
 export { ColorThemeToggle } from './ColorThemeToggle';
 export { Controls } from './Controls';
 export { ExampleComponent } from './ExampleComponent';
-export { GeometryControls } from './GeometryControls';
+export { PackingControls } from './PackingControls';
 export { Parcel } from './Parcel';
 export { RoutingRoot } from './RoutingRoot';
 export { Scene } from './Scene';

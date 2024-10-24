@@ -44,6 +44,7 @@ const placeParcel = (layer: Layer, parcel: Parcel, x: number, z: number) => {
   const proposedParcel: PlacedParcel = {
     id: parcel.id,
     name: parcel.name,
+    quantity: parcel.quantity,
     size: parcel.size,
     rotation: Rotation.DHW, // Fix
     rotatedSize: parcel.size,

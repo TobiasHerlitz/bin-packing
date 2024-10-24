@@ -6,6 +6,7 @@ const exampleParcels = [
   {
     id: UUIDv4(),
     name: 'ItemOne',
+    quantity: 1,
     size: {
       width: 40,
       height: 40,
@@ -26,6 +27,7 @@ const exampleParcels = [
   {
     id: UUIDv4(),
     name: 'ItemTwo',
+    quantity: 1,
     size: {
       width: 20,
       height: 40,
@@ -46,6 +48,7 @@ const exampleParcels = [
   {
     id: UUIDv4(),
     name: 'ItemThree',
+    quantity: 1,
     size: {
       width: 40,
       height: 40,
@@ -66,6 +69,7 @@ const exampleParcels = [
   {
     id: UUIDv4(),
     name: 'ItemFour',
+    quantity: 1,
     size: {
       width: 70,
       height: 40,
@@ -86,13 +90,15 @@ const exampleParcels = [
 ];
 
 export const geometryInitialState: GeometryState = {
-  parcels: exampleParcels.map(({ id, name, size }) => ({
+  parcels: exampleParcels.map(({ id, name, size, quantity }) => ({
     id,
+    quantity,
     name,
     size,
   })),
   bins: [
     {
+      id: UUIDv4(),
       name: 'BinOne',
       cost: 400,
       size: {

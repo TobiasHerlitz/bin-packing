@@ -4,6 +4,7 @@ export interface Parcel {
   id: string;
   name: string;
   size: Size;
+  quantity: number;
 }
 
 export type PlacedParcel = Parcel & {

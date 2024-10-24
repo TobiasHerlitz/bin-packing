@@ -40,6 +40,7 @@ function putParcel(
     const proposedParcel: PlacedParcel = {
       id: item.id,
       name: item.name,
+      quantity: item.quantity,
       size: item.size,
       rotation: rotation,
       rotatedSize: getRotatedSize(item, rotation),
