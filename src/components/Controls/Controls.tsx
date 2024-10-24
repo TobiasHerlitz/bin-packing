@@ -1,4 +1,4 @@
-import { GeometryControls, StageControls } from '@components';
+import { PackingControls, StageControls } from '@components';
 import { useClickOutside } from '@hooks';
 import { ReactNode, useRef, useState } from 'react';
 
@@ -24,7 +24,7 @@ export const Controls = () => {
       category: TabCategory.Geometry,
       icon: 'package_2',
       component: (
-        <GeometryControls closeControls={() => setSelectedTab(undefined)} />
+        <PackingControls closeControls={() => setSelectedTab(undefined)} />
       ),
     },
     {
@@ -41,25 +41,27 @@ export const Controls = () => {
 
   return (
     <div className={styles.root}>
-      <div ref={controlsRef} className={styles.controls}>
-        <div className={styles.tabs}>
-          {tabs.map((tab) => (
-            <button
-              key={tab.category}
-              className={`${styles.categoryButton} material-symbols-outlined`}
-              onClick={() =>
-                setSelectedTab(
-                  selectedTab?.category === tab.category ? undefined : tab
-                )
-              }
-            >
-              {tab.icon}
-            </button>
-          ))}
+      <div className={selectedTab ? styles.showControls : styles.hideControls}>
+        <div ref={controlsRef} className={styles.controls}>
+          <div className={styles.tabs}>
+            {tabs.map((tab) => (
+              <button
+                key={tab.category}
+                className={`${styles.categoryButton} material-symbols-outlined`}
+                onClick={() =>
+                  setSelectedTab(
+                    selectedTab?.category === tab.category ? undefined : tab
+                  )
+                }
+              >
+                {tab.icon}
+              </button>
+            ))}
+          </div>
+          {selectedTab && (
+            <div className={styles.body}>{selectedTab.component}</div>
+          )}
         </div>
-        {selectedTab && (
-          <div className={styles.body}>{selectedTab.component}</div>
-        )}
       </div>
     </div>
   );

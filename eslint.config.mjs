@@ -7,6 +7,7 @@ import tseslint from 'typescript-eslint';
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import { fixupPluginRules } from "@eslint/compat";
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -29,7 +30,7 @@ export default tseslint.config(
       }
     },
     plugins: {
-      'react-hooks': reactHooks,
+      'react-hooks': fixupPluginRules(reactHooks),
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSort,
       react,

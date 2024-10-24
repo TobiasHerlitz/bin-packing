@@ -1,1 +1,0 @@
-export { GeometryControls } from './GeometryControls';

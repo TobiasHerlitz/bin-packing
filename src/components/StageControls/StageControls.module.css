@@ -1,6 +1,7 @@
 @import url('@globalStyle');
 
 .root {
+  width: 300px;
 }
 
 .actions {

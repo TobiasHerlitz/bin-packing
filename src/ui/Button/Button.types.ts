@@ -11,4 +11,5 @@ export enum ButtonSize {
 export enum ButtonColor {
   Primary = 'primary',
   Secondary = 'secondary',
+  BGColor = 'bgcolor',
 }

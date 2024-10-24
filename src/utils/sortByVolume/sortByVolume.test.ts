@@ -1,4 +1,5 @@
 // sum.test.js
+import { v4 as UUIDv4 } from 'uuid';
 import { expect, test } from 'vitest';
 
 import { sortByVolume } from './sortByVolume.js';
@@ -6,6 +7,7 @@ import { sortByVolume } from './sortByVolume.js';
 test('sorting bins', () => {
   const sortedBins = sortByVolume([
     {
+      id: UUIDv4(),
       name: 'BinOne',
       cost: 0,
       size: {
@@ -16,6 +18,7 @@ test('sorting bins', () => {
       items: [],
     },
     {
+      id: UUIDv4(),
       name: 'BinTwo',
       cost: 0,
       size: {
@@ -26,6 +29,7 @@ test('sorting bins', () => {
       items: [],
     },
     {
+      id: UUIDv4(),
       name: 'BinThree',
       cost: 0,
       size: {
@@ -36,6 +40,7 @@ test('sorting bins', () => {
       items: [],
     },
     {
+      id: UUIDv4(),
       name: 'BinFour',
       cost: 0,
       size: {
