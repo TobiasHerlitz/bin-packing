@@ -1,7 +1,7 @@
-import { PlacedParcel } from './parcel';
+import { Parcel } from '@entities';
 
 export interface Layer {
   width: number;
   depth: number;
-  parcels: PlacedParcel[];
+  parcels: Parcel[];
 }

@@ -1,4 +1,4 @@
-import { Bin, Parcel } from '@types';
+import { Bin, Parcel } from '@entities';
 
 import { buildLayer } from './buildLayer';
 
@@ -29,7 +29,7 @@ export const multipleContainersMinimizeCost = (
     parcels
   );
 
-  bins[0].items = layer.parcels;
+  bins[0].parcels = layer.parcels;
 
   return bins[0];
 };
@@ -38,11 +38,11 @@ export const multipleContainersMinimizeCost = (
  * Gets total cost of a given solution (array of bins)
  */
 export const getTotalCost = (bins: Bin[]) => {
-  return bins.reduce((carry, bin) => carry + bin.cost, 0);
+  return bins.reduce((carry, bin) => carry + (bin.cost || 0), 0);
 };
 
 export const allParcelsPlaced = (bins: Bin[], parcels: Parcel[]) => {
-  const allPlacedItems = bins.map(({ items }) => items).flat();
+  const allPlacedItems = bins.map(({ parcels }) => parcels).flat();
 
   const allItemsPlaced = parcels.every((parcel) =>
     allPlacedItems.some((placedItem) => placedItem.id === parcel.id)

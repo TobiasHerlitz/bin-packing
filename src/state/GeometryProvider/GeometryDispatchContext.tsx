@@ -1,4 +1,4 @@
-import { Parcel } from '@types';
+import { Parcel } from '@entities';
 import { createContext, Dispatch } from 'react';
 
 interface AddParcel {

@@ -10,7 +10,7 @@ export const SelectedOverlay = () => {
     return null;
   }
 
-  const selectedParcel = geometryState.bins[0].items.find(
+  const selectedParcel = geometryState.bins[0].parcels.find(
     (parcel) => parcel.name === stageState.selectedParcel
   );
 
@@ -34,9 +34,9 @@ export const SelectedOverlay = () => {
         <tbody>
           <tr>
             <td>{selectedParcel.name}</td>
-            <td>{selectedParcel.size.width}</td>
-            <td>{selectedParcel.size.height}</td>
-            <td>{selectedParcel.size.depth}</td>
+            <td>{selectedParcel.originalSize.width}</td>
+            <td>{selectedParcel.originalSize.height}</td>
+            <td>{selectedParcel.originalSize.depth}</td>
           </tr>
         </tbody>
       </table>

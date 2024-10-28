@@ -1,5 +1,5 @@
+import { Parcel } from '@entities';
 import { ColumnDef } from '@tanstack/react-table';
-import { Parcel } from '@types';
 import { Button, ButtonColor, ButtonSize, InputTable } from '@ui';
 import { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
@@ -62,7 +62,7 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
             min="0"
             step="1"
             type="number"
-            {...register(`parcels.${row.index}.size.width`, {
+            {...register(`parcels.${row.index}.originalSize.width`, {
               required: true,
               valueAsNumber: true,
             })}
@@ -78,7 +78,7 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
             min="0"
             step="1"
             type="number"
-            {...register(`parcels.${row.index}.size.height`, {
+            {...register(`parcels.${row.index}.originalSize.height`, {
               required: true,
               valueAsNumber: true,
             })}
@@ -94,7 +94,7 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
             min="0"
             step="1"
             type="number"
-            {...register(`parcels.${row.index}.size.depth`, {
+            {...register(`parcels.${row.index}.originalSize.depth`, {
               required: true,
               valueAsNumber: true,
             })}

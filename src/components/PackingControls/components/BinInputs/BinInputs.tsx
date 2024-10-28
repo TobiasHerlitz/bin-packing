@@ -1,5 +1,5 @@
+import { Bin } from '@entities';
 import { ColumnDef } from '@tanstack/react-table';
-import { Bin } from '@types';
 import { Button, ButtonColor, ButtonSize, InputTable } from '@ui';
 import { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';

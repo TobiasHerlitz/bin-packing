@@ -30,7 +30,8 @@
       "@packers": ["./src/packers"],
       "@utils": ["./src/utils"],
       "@ui": ["./src/ui"],
-      "@style": ["./src/style"]
+      "@style": ["./src/style"],
+      "@entities": ["./src/entities"]
     }
   },
   "include": ["src"],

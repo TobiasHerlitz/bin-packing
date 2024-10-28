@@ -1,13 +1,12 @@
 // sum.test.js
-import { v4 as UUIDv4 } from 'uuid';
+import { Bin } from '@entities';
 import { expect, test } from 'vitest';
 
 import { sortByVolume } from './sortByVolume.js';
 
 test('sorting bins', () => {
   const sortedBins = sortByVolume([
-    {
-      id: UUIDv4(),
+    new Bin({
       name: 'BinOne',
       cost: 0,
       size: {
@@ -15,10 +14,9 @@ test('sorting bins', () => {
         height: 20,
         depth: 20,
       },
-      items: [],
-    },
-    {
-      id: UUIDv4(),
+      parcels: [],
+    }),
+    new Bin({
       name: 'BinTwo',
       cost: 0,
       size: {
@@ -26,10 +24,9 @@ test('sorting bins', () => {
         height: 10,
         depth: 20,
       },
-      items: [],
-    },
-    {
-      id: UUIDv4(),
+      parcels: [],
+    }),
+    new Bin({
       name: 'BinThree',
       cost: 0,
       size: {
@@ -37,10 +34,9 @@ test('sorting bins', () => {
         height: 10,
         depth: 20,
       },
-      items: [],
-    },
-    {
-      id: UUIDv4(),
+      parcels: [],
+    }),
+    new Bin({
       name: 'BinFour',
       cost: 0,
       size: {
@@ -48,8 +44,8 @@ test('sorting bins', () => {
         height: 10,
         depth: 20,
       },
-      items: [],
-    },
+      parcels: [],
+    }),
   ]);
 
   expect(sortedBins[0].name).toBe('BinThree');

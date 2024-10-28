@@ -1,4 +1,4 @@
-import { Bin } from '@types';
+import { Bin } from '@entities';
 
 /**
  * Sorts by volume in descending order

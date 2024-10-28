@@ -1,161 +1,61 @@
-import { Axis, Bin, Parcel, PlacedParcel, Rotation, Size } from '@types';
-import { axisToCoordinate, axisToSize, sortByVolume } from '@utils';
+import { Bin, Parcel } from '@entities';
+import { Axis, Coordinate, Rotation } from '@types';
+import { sortByVolume } from '@utils';
 
-import { getRotatedSize, sortParcels } from './parcel';
+import { sortParcels } from './parcel';
 
-const START_POSITION: Size = {
-  width: 0,
-  height: 0,
-  depth: 0,
+const START_POSITION: Coordinate = {
+  x: 0,
+  y: 0,
+  z: 0,
 };
+
+const AXIS_PRIORITY = [Axis.Depth, Axis.Width, Axis.Height];
 
 export function bestBin(bins: Bin[], items: Parcel[]) {
   const sortedBins = sortByVolume(bins);
   const sortedParcels = sortParcels(items);
   // Call pack_to_bin on each bin with all items. OG returns array of unfitted items, easier to return null
   sortedBins.forEach((bin) => {
-    bin.items = [];
+    bin.parcels = [];
     sortedParcels.every((item) => {
       const placedParcel = packParcel(bin, item);
       if (!placedParcel) {
-        bin.items = [];
+        bin.parcels = [];
         return false;
       }
       return true;
     });
   });
+  console.log(bins[0]);
   return bins[0];
   // Get best filling ratio of all bins
   // Select bin with highest filling ratio
 }
 
-function putParcel(
-  bin: Bin,
-  item: Parcel,
-  pivot: Size
-): undefined | PlacedParcel {
-  let placedParcel: undefined | PlacedParcel = undefined;
-
-  Object.values(Rotation).some((rotation) => {
-    const proposedParcel: PlacedParcel = {
-      id: item.id,
-      name: item.name,
-      quantity: item.quantity,
-      size: item.size,
-      rotation: rotation,
-      rotatedSize: getRotatedSize(item, rotation),
-      position: {
-        x: pivot.width,
-        y: pivot.height,
-        z: pivot.depth,
-      },
-    };
-
-    const fits =
-      bin.size.width > proposedParcel.rotatedSize.width + pivot.width &&
-      bin.size.height > proposedParcel.rotatedSize.height + pivot.height &&
-      bin.size.depth > proposedParcel.rotatedSize.depth + pivot.depth;
-
-    if (!fits) return false;
-    if (
-      bin.items.some((binParcel) => itemsIntersect(binParcel, proposedParcel))
-    ) {
-      return false;
-    }
-    bin.items.push(proposedParcel);
-    placedParcel = proposedParcel;
-    return true;
-  });
-
-  if (placedParcel) {
-    return placedParcel;
-  }
-
-  return undefined;
-}
-
-function itemsIntersect(binParcel: PlacedParcel, proposedParcel: PlacedParcel) {
-  return (
-    rectIntersect(binParcel, proposedParcel, Axis.Width, Axis.Height) &&
-    rectIntersect(binParcel, proposedParcel, Axis.Height, Axis.Depth) &&
-    rectIntersect(binParcel, proposedParcel, Axis.Width, Axis.Depth)
-  );
-}
-
-function rectIntersect(
-  binParcel: PlacedParcel,
-  proposedParcel: PlacedParcel,
-  axisOne: Axis,
-  axisTwo: Axis
-) {
-  const binParcelSizeX = binParcel.rotatedSize[axisToSize[axisOne]];
-  const binParcelSizeY = binParcel.rotatedSize[axisToSize[axisTwo]];
-  const proposedParcelSizeX = proposedParcel.rotatedSize[axisToSize[axisOne]];
-  const proposedParcelSizeY = proposedParcel.rotatedSize[axisToSize[axisTwo]];
-
-  const binParcelCenter = {
-    x: binParcel.position[axisToCoordinate[axisOne]] + binParcelSizeX / 2,
-    y: binParcel.position[axisToCoordinate[axisTwo]] + binParcelSizeY / 2,
-  };
-
-  const proposedParcelCenter = {
-    x:
-      proposedParcel.position[axisToCoordinate[axisOne]] +
-      proposedParcelSizeX / 2,
-    y:
-      proposedParcel.position[axisToCoordinate[axisTwo]] +
-      proposedParcelSizeY / 2,
-  };
-
-  const distanceX =
-    Math.max(binParcelCenter.x, proposedParcelCenter.x) -
-    Math.min(binParcelCenter.x, proposedParcelCenter.x);
-  const distanceY =
-    Math.max(binParcelCenter.y, proposedParcelCenter.y) -
-    Math.min(binParcelCenter.y, proposedParcelCenter.y);
-
-  // TODO: Handle rounding better
-  return (
-    distanceX < (binParcelSizeX + proposedParcelSizeX - 0.00001) / 2 &&
-    distanceY < (binParcelSizeY + proposedParcelSizeY - 0.00001) / 2
-  );
-}
-
-function packParcel(
-  bin: Bin,
-  proposedParcel: Parcel
-): undefined | PlacedParcel {
-  if (!bin.items.length) {
+function packParcel(bin: Bin, proposedParcel: Parcel): undefined | Parcel {
+  if (!bin.parcels.length) {
     return putParcel(bin, proposedParcel, START_POSITION);
   }
 
-  let placedParcel: undefined | PlacedParcel = undefined;
-  Object.values(Axis).some((axis) => {
-    bin.items.some((item) => {
-      let pivot = { width: 0, height: 0, depth: 0 };
+  let placedParcel: undefined | Parcel = undefined;
+
+  AXIS_PRIORITY.some((axis) => {
+    bin.parcels.some((parcel) => {
+      let pivot = { x: 0, y: 0, z: 0 };
+      const { width, height, depth } = parcel.getRotatedSize();
+      const { x, y, z } = parcel.getPosition();
 
       if (axis === Axis.Width) {
-        pivot = {
-          width: item.position.x + item.size.width,
-          height: item.position.y,
-          depth: item.position.z,
-        };
+        pivot = { x: x + width, y, z };
       }
 
       if (axis === Axis.Height) {
-        pivot = {
-          width: item.position.x,
-          height: item.position.y + item.size.height,
-          depth: item.position.z,
-        };
+        pivot = { x, y: y + height, z };
       }
 
       if (axis === Axis.Depth) {
-        pivot = {
-          width: item.position.x,
-          height: item.position.y,
-          depth: item.position.z + item.size.depth,
-        };
+        pivot = { x, y, z: z + depth };
       }
 
       placedParcel = putParcel(bin, proposedParcel, pivot) || undefined;
@@ -170,4 +70,40 @@ function packParcel(
   });
 
   return placedParcel;
+}
+
+function putParcel(
+  bin: Bin,
+  parcel: Parcel,
+  pivot: Coordinate
+): undefined | Parcel {
+  Object.values(Rotation).some((rotation) => {
+    parcel.setRotation(rotation);
+    parcel.setPosition({
+      x: pivot.x,
+      y: pivot.y,
+      z: pivot.z,
+    });
+
+    if (!bin.fits(parcel)) {
+      parcel.unsetPose();
+      return false;
+    }
+
+    const intersects = bin.parcels.some((binParcel) =>
+      binParcel.intersects(parcel)
+    );
+    if (intersects) {
+      parcel.unsetPose();
+      return false;
+    }
+    bin.parcels.push(parcel);
+    return true;
+  });
+
+  if (parcel.isPosed()) {
+    return parcel;
+  }
+
+  return undefined;
 }

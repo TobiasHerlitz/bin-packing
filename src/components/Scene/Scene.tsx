@@ -13,20 +13,20 @@ export const Scene = () => {
   const { bins } = useGeometryState();
   const { showScene } = useStageState();
   const stageDispatch = useStageDispatch();
-  if (!bins[0] || !bins[0].items) {
+  if (!bins[0] || !bins[0].parcels) {
     console.warn('Failed');
   }
   const bin = bins[0];
-  const placedParcels = bin.items.map((item, index) => (
+  const placedParcels = bin.parcels.map((parcel, index) => (
     <Parcel
-      name={item.name}
-      key={item.name}
+      name={parcel.name}
+      key={parcel.name}
       color={parcelColors[index % 4]}
-      size={sizeToMeters(item.rotatedSize)}
+      size={sizeToMeters(parcel.getRotatedSize())}
       position={{
-        x: (item.position.x + item.size.width / 2) / 100,
-        y: (item.position.y + item.size.height / 2) / 100,
-        z: (item.position.z + item.size.depth / 2) / 100,
+        x: (parcel.getPosition().x + parcel.getRotatedSize().width / 2) / 100,
+        y: (parcel.getPosition().y + parcel.getRotatedSize().height / 2) / 100,
+        z: (parcel.getPosition().z + parcel.getRotatedSize().depth / 2) / 100,
       }}
     />
   ));
@@ -43,7 +43,7 @@ export const Scene = () => {
 
   return (
     <div className={styles.canvasWrapper}>
-      <Canvas shadows camera={{ position: [-3, 3, -3] }}>
+      <Canvas shadows camera={{ position: [2, 2, 2] }}>
         <SceneHelpers />
         <RandomizedLight amount={8} frames={100} position={[5, 5, -10]} />
         <hemisphereLight intensity={1} />

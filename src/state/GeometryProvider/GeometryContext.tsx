@@ -1,4 +1,4 @@
-import { Bin, Parcel } from '@types';
+import { Bin, Parcel } from '@entities';
 import { createContext } from 'react';
 
 import { geometryInitialState } from './geometryInitialState';

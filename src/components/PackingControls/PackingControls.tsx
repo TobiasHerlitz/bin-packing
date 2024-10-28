@@ -1,5 +1,5 @@
+import { Bin, Parcel } from '@entities';
 import { useGeometryDispatch, useGeometryState } from '@hooks';
-import { Bin, Parcel } from '@types';
 import { Button, ButtonColor, ButtonSize } from '@ui';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -48,10 +48,6 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
       <form onSubmit={form.handleSubmit(pack)}>
         <ParcelInputs form={form} />
         <BinInputs form={form} />
-        {/*        <hr />
-        <button className={styles.submitButton} type="submit">
-          Pack
-        </button>*/}
         <div className={styles.bottomButtons}>
           <div className={styles.spreadsheetButtons}>
             <Button
