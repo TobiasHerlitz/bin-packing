@@ -6,6 +6,10 @@ interface ToggleGrid {
   type: 'toggleGrid';
 }
 
+interface TogglePerformance {
+  type: 'togglePerformance';
+}
+
 interface ToggleScene {
   type: 'toggleScene';
 }
@@ -22,6 +26,7 @@ interface SetCameraRef {
 
 export type StageActions =
   | ToggleGrid
+  | TogglePerformance
   | ToggleScene
   | SelectParcel
   | SetCameraRef;

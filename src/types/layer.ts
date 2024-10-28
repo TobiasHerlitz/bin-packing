@@ -5,3 +5,8 @@ export interface Layer {
   depth: number;
   parcels: Parcel[];
 }
+
+export interface HeightGrouping {
+  height: number;
+  parcels: Parcel[];
+}

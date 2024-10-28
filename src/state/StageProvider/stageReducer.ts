@@ -9,6 +9,9 @@ export function stageReducer(
     case 'toggleGrid': {
       return { ...state, showGrid: !state.showGrid };
     }
+    case 'togglePerformance': {
+      return { ...state, showPerformance: !state.showPerformance };
+    }
     case 'toggleScene': {
       return { ...state, showScene: !state.showScene };
     }

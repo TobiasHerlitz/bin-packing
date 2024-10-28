@@ -1,0 +1,1 @@
+export { sortByParcelCount } from './sortByParcelCount';

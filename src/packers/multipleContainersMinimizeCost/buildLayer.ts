@@ -22,8 +22,18 @@ const g4Heuristic = (layer: Layer, parcels: Parcel[], x = 0, z = 0) => {
   //       (remainingParcel) => remainingParcel !== parcels[i]
   //     );
 
-  //     g4Heuristic(layer, remainingParcels, x + parcels[i].originalSize.width, z);
-  //     g4Heuristic(layer, remainingParcels, x, z + parcels[i].originalSize.depth);
+  //     g4Heuristic(
+  //       layer,
+  //       remainingParcels,
+  //       x + parcels[i].originalSize.width,
+  //       z
+  //     );
+  //     g4Heuristic(
+  //       layer,
+  //       remainingParcels,
+  //       x,
+  //       z + parcels[i].originalSize.depth
+  //     );
   //     break;
   //   }
   // }

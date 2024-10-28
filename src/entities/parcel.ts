@@ -63,33 +63,33 @@ export class Parcel {
         };
       case Rotation.HWD:
         return {
-          height: this.originalSize.height,
-          width: this.originalSize.width,
+          width: this.originalSize.height,
+          height: this.originalSize.width,
           depth: this.originalSize.depth,
         };
       case Rotation.HDW:
         return {
-          height: this.originalSize.height,
-          depth: this.originalSize.depth,
-          width: this.originalSize.width,
+          width: this.originalSize.height,
+          height: this.originalSize.depth,
+          depth: this.originalSize.width,
         };
       case Rotation.DHW:
         return {
-          depth: this.originalSize.depth,
+          width: this.originalSize.depth,
           height: this.originalSize.height,
-          width: this.originalSize.width,
+          depth: this.originalSize.width,
         };
       case Rotation.DWH:
         return {
-          depth: this.originalSize.depth,
-          width: this.originalSize.width,
-          height: this.originalSize.height,
+          width: this.originalSize.depth,
+          height: this.originalSize.width,
+          depth: this.originalSize.height,
         };
       case Rotation.WDH:
         return {
           width: this.originalSize.width,
-          depth: this.originalSize.depth,
-          height: this.originalSize.height,
+          height: this.originalSize.depth,
+          depth: this.originalSize.height,
         };
       // default:
       //   throw new Error('Could not determine rotated size')
@@ -102,6 +102,26 @@ export class Parcel {
 
   setRotation(rotation: Rotation) {
     this.#rotation = rotation;
+  }
+
+  /**
+   * Attempts to set rotation on instance so resulting height matches passed layerHeight.
+   */
+  rotateToLayerHeight(layerHeight: number) {
+    if (this.originalSize.height === layerHeight) {
+      this.setRotation(Rotation.WHD);
+      return;
+    }
+
+    if (this.originalSize.width === layerHeight) {
+      this.setRotation(Rotation.HWD);
+      return;
+    }
+
+    if (this.originalSize.depth === layerHeight) {
+      this.setRotation(Rotation.HDW);
+      return;
+    }
   }
 
   getPosition() {

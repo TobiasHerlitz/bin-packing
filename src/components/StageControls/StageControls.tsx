@@ -28,6 +28,14 @@ export const StageControls = () => {
             >
               Show grid
             </Toggle>
+            <Toggle
+              className={styles.toggle}
+              id="togglePerformance"
+              checked={stageState.showPerformance}
+              onChange={() => stageDispatch({ type: 'togglePerformance' })}
+            >
+              Show performance
+            </Toggle>
             <div className={styles.buttonRow}>
               <span>Reset camera</span>
               <Button

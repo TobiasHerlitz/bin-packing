@@ -1,6 +1,7 @@
 export const stageInitialState = {
   showGrid: true,
-  showScene: true,
+  showPerformance: true,
+  showScene: false,
   selectedParcel: undefined,
   cameraRef: undefined,
 };

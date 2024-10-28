@@ -3,6 +3,7 @@ import { useGeometryState, useStageDispatch, useStageState } from '@hooks';
 import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { sizeToMeters } from '@utils';
+import { Perf } from 'r3f-perf';
 import { useEffect, useRef } from 'react';
 
 import styles from './Scene.module.css';
@@ -11,7 +12,7 @@ export const Scene = () => {
   const cameraRef = useRef(null);
   const parcelColors = ['#001B2E', '#294C60', '#ADB6C4', '#FFEFD3', '#FFC49B'];
   const { bins } = useGeometryState();
-  const { showScene } = useStageState();
+  const { showScene, showPerformance } = useStageState();
   const stageDispatch = useStageDispatch();
   if (!bins[0] || !bins[0].parcels) {
     console.warn('Failed');
@@ -44,6 +45,7 @@ export const Scene = () => {
   return (
     <div className={styles.canvasWrapper}>
       <Canvas shadows camera={{ position: [2, 2, 2] }}>
+        {showPerformance && <Perf position="bottom-left" />}
         <SceneHelpers />
         <RandomizedLight amount={8} frames={100} position={[5, 5, -10]} />
         <hemisphereLight intensity={1} />
