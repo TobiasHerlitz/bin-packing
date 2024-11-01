@@ -1,130 +1,108 @@
-/** G4-heuristic Bin-packing (G4BP)
+/**
 Essentially breaks it down to a 2D bin-packing problem by using layers where
 boxes are equal height. The layers are then placed vertically (1D bin packing problem)
 Dimensions can be assigned arbitrarily. w, h, d. Depth is parallell to the x axis
 */
 
-import { Parcel } from '@entities';
-import { Layer } from '@types';
+import { Bin, Parcel } from '@entities';
+import { sortByDepth } from '@utils';
 
-// x: pivot.width,
-// y: pivot.height,
-// z: pivot.depth,
+export const buildLayer = (layer: Bin, parcels: Parcel[]) => {
+  return bestFitDescending(layer, parcels);
+};
 
-const g4Heuristic = (layer: Layer, parcels: Parcel[], x = 0, z = 0) => {
-  if (parcels.length === 0) {
-    return layer;
+const placeParcel = (shelf: Bin, parcel: Parcel) => {
+  console.log('placing', parcel.name);
+  parcel.setPosition({
+    x: shelf.usedWidth(),
+    y: 0,
+    z: 0,
+  });
+
+  if (shelf.canPlaceParcel(parcel)) {
+    shelf.parcels.push(parcel);
+    return true;
   }
-  console.log(x, z);
-  // for (let i = 0; i < parcels.length; ++i) {
-  //   if (placeParcel(layer, parcels[i], x, z)) {
-  //     const remainingParcels = parcels.filter(
-  //       (remainingParcel) => remainingParcel !== parcels[i]
-  //     );
 
-  //     g4Heuristic(
-  //       layer,
-  //       remainingParcels,
-  //       x + parcels[i].originalSize.width,
-  //       z
-  //     );
-  //     g4Heuristic(
-  //       layer,
-  //       remainingParcels,
-  //       x,
-  //       z + parcels[i].originalSize.depth
-  //     );
-  //     break;
-  //   }
-  // }
-
-  // parcels.every((parcel) => {
-  //   if (placeParcel(layer, parcel, x, z)) {
-  //     const remainingParcels = parcels.filter((remainingParcel) => remainingParcel !== parcel);
-
-  //     buildLayer(layer, remainingParcels, x + parcel.size.width, z)
-  //     buildLayer(layer, remainingParcels, x, z + parcel.size.depth)
-  //     return false;
-  //   }
-  // })
-
-  return layer;
+  parcel.setPosition(undefined);
+  return false;
 };
 
-export const buildLayer = (layer: Layer, parcels: Parcel[], x = 0, z = 0) => {
-  return g4Heuristic(layer, parcels, x, z);
-  // const layers: Layer[] = [];
+const bestFitDescending = (layer: Bin, parcels: Parcel[]) => {
+  parcels.forEach((parcel) => {
+    const { width, depth } = parcel.getRotatedSize();
+    if (depth < width) {
+      parcel.rotate90();
+    }
+  });
+  const sortedParcels = sortByDepth(parcels);
 
-  // // Try each box type for creating layers
-  // for (const parcel of parcels) {
-  //     // Try all orientations of the current box type
-  //     for (const orientation of parcel.getOrientations()) {
-  //         const layerHeight = orientation.height;
-
-  //         // Check if the layer fits vertically in the container
-  //         if (layerHeight <= container.height) {
-  //             const numBoxesInLayer = g4Heuristic(container.length, container.width, orientation);
-
-  //             if (numBoxesInLayer > 0) {
-  //                 const newLayer = new Layer(layerHeight, numBoxesInLayer, box.type);
-
-  //                 // Add boxes to the layer
-  //                 for (let i = 0; i < numBoxesInLayer; i++) {
-  //                     newLayer.addBox(orientation);
-  //                 }
-
-  //                 layers.push(newLayer);
-  //             }
-  //         }
-  //     }
-  // }
-
-  // return layers;
+  const shelves = placeIntoShelves(layer, sortedParcels);
+  return combineShelves(layer, shelves);
 };
 
-// const placeParcel = (layer: Layer, parcel: Parcel, x: number, z: number) => {
-//   const proposedParcel: PlacedParcel = {
-//     id: parcel.id,
-//     name: parcel.name,
-//     quantity: parcel.quantity,
-//     size: parcel.size,
-//     rotation: Rotation.DHW, // Fix
-//     rotatedSize: parcel.size,
-//     position: {
-//       x,
-//       y: 0,
-//       z,
-//     },
-//   };
+const placeIntoShelves = (layer: Bin, parcels: Parcel[]) => {
+  const shelves: Bin[] = [];
+  parcels.forEach((parcel) => {
+    shelves.some((shelf) => {
+      return placeParcel(shelf, parcel);
+    });
+    if (parcel.isPositioned()) {
+      return;
+    }
 
-//   if (!canPlaceParcel(layer, proposedParcel, x, z)) {
-//     return false;
-//   }
+    const { width, depth } = parcel.getRotatedSize();
+    if (width > layer.size.width) {
+      throw new Error(
+        'Cannot create shelf that would hold next parcel without exceeding layer width'
+      );
+    }
 
-//   layer.parcels.push(proposedParcel);
-//   return true;
-// };
+    const newShelf = new Bin({
+      size: {
+        width: layer.size.width,
+        height: layer.size.height,
+        depth,
+      },
+    });
 
-// const canPlaceParcel = (
-//   layer: Layer,
-//   proposedParcel: PlacedParcel,
-//   x: number,
-//   z: number
-// ) => {
-//   if (
-//     x + proposedParcel.size.width > layer.width ||
-//     z + proposedParcel.size.depth > layer.depth
-//   ) {
-//     return false;
-//   }
+    const placementSuccessful = placeParcel(newShelf, parcel);
+    if (!placementSuccessful) {
+      throw new Error(
+        'Something went wrong when placing into newly created shelf'
+      );
+    }
 
-//   return layer.parcels.every(
-//     (placedParcel) =>
-//       !(
-//         x + proposedParcel.size.width <= placedParcel.position.x ||
-//         x >= placedParcel.position.x + placedParcel.size.width
-//       ) ||
-//       z + proposedParcel.size.depth <= placedParcel.position.z ||
-//       z >= placedParcel.position.z + placedParcel.size.height
-//   );
+    shelves.push(newShelf);
+  });
+  return shelves;
+};
+
+const combineShelves = (layer: Bin, shelves: Bin[]) => {
+  let pivotZ = 0;
+  shelves.forEach((shelf) => {
+    const shiftedParcels = shelf.parcels.map((parcel) => {
+      const { x, y, z } = parcel.getPosition();
+      parcel.setPosition({
+        x,
+        y,
+        z: z + pivotZ,
+      });
+      return parcel;
+    });
+    layer.parcels.push(...shiftedParcels);
+    pivotZ += shelf.size.depth;
+  });
+};
+
+// FiniteBestStrip
+
+// KPRG
+// 1. Sort by min(width, depth)
+// 2. Create rows with KP01. (Looks like BFDH)
+
+// export const axisToCoordinate: Record<Axis, keyof Coordinate> = {
+//   [Axis.Width]: 'x',
+//   [Axis.Height]: 'y',
+//   [Axis.Depth]: 'z',
 // };

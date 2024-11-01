@@ -1,10 +1,12 @@
 import { Axis, Coordinate, Rotation, Size } from '@types';
 import { axisToCoordinate, axisToSize } from '@utils';
+import dockerNames from 'docker-names';
 import { v4 as UUIDv4 } from 'uuid';
 
 interface ParcelArgs {
-  name: string;
+  name?: string;
   originalSize: Size;
+  id?: string;
   quantity?: number;
   rotation?: Rotation;
   position?: Coordinate;
@@ -19,6 +21,7 @@ export class Parcel {
   #position?: Coordinate;
 
   constructor({
+    id,
     name,
     originalSize,
     quantity = 1,
@@ -33,12 +36,23 @@ export class Parcel {
       throw new Error('Can only place single parcels');
     }
 
-    this.id = UUIDv4();
-    this.name = name;
+    this.id = id ?? UUIDv4();
+    this.name = name || dockerNames.getRandomName();
     this.originalSize = originalSize;
     this.quantity = quantity;
     this.#rotation = rotation;
     this.#position = position;
+  }
+
+  clone() {
+    return new Parcel({
+      id: this.id,
+      name: this.name,
+      originalSize: this.originalSize,
+      quantity: this.quantity,
+      rotation: this.#rotation,
+      position: this.#position,
+    });
   }
 
   isRotated() {
@@ -100,6 +114,37 @@ export class Parcel {
     return this.#rotation;
   }
 
+  /**
+   * Rotates 90 degrees while 'locking' the height axis.
+   * Essentially flipping currently rotated width with currently rotated depth
+   */
+  rotate90() {
+    if (!this.#rotation) {
+      throw new Error('Cannot rotate 90 if current rotation is not set');
+    }
+
+    switch (this.#rotation) {
+      case Rotation.WHD:
+        this.#rotation = Rotation.DHW;
+        break;
+      case Rotation.HWD:
+        this.#rotation = Rotation.DWH;
+        break;
+      case Rotation.HDW:
+        this.#rotation = Rotation.WDH;
+        break;
+      case Rotation.DHW:
+        this.#rotation = Rotation.WHD;
+        break;
+      case Rotation.DWH:
+        this.#rotation = Rotation.HWD;
+        break;
+      case Rotation.WDH:
+        this.#rotation = Rotation.HDW;
+        break;
+    }
+  }
+
   setRotation(rotation: Rotation) {
     this.#rotation = rotation;
   }
@@ -131,7 +176,12 @@ export class Parcel {
     return this.#position;
   }
 
-  setPosition(position: Coordinate) {
+  setPosition(position?: Coordinate) {
+    if (!position) {
+      this.#position = position;
+      return;
+    }
+
     if (!this.#rotation) {
       throw new Error('Rotation is required in order to set position');
     }
@@ -200,5 +250,10 @@ export class Parcel {
       distanceX < (binParcelSizeX + proposedParcelSizeX - 0.00001) / 2 &&
       distanceY < (binParcelSizeY + proposedParcelSizeY - 0.00001) / 2
     );
+  }
+
+  volume() {
+    const { width, height, depth } = this.originalSize;
+    return width * height * depth;
   }
 }

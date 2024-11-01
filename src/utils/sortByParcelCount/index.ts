@@ -1,1 +1,0 @@
-export { sortByParcelCount } from './sortByParcelCount';

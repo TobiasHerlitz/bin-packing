@@ -26,6 +26,7 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
   });
 
   const pack: SubmitHandler<FormInputs> = (data) => {
+    console.log('running pack');
     geometryDispatch({
       type: 'setParcels',
       payload: data.parcels.map(

@@ -1,4 +1,4 @@
-import { bestBin } from '@packers';
+import { multipleContainersMinimizeCost } from '@packers';
 
 import { GeometryState } from './GeometryContext';
 import { GeometryActions } from './GeometryDispatchContext';
@@ -18,8 +18,8 @@ export function geometryReducer(
     }
     case 'pack': {
       console.log('PACKING');
-      const bin = bestBin(state.bins, state.parcels);
-      // const bin = multipleContainersMinimizeCost(state.bins, state.parcels);
+      const clonedParcels = state.parcels.map((parcel) => parcel.clone());
+      const bin = multipleContainersMinimizeCost(state.bins, clonedParcels);
       return { ...state, bins: [bin] };
     }
     default: {
