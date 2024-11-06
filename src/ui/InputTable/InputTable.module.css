@@ -2,7 +2,6 @@
   margin-bottom: var(--gap-2);
   border-collapse: collapse;
   table-layout: fixed;
-  width: 0px;
 
   th {
     text-align: left;

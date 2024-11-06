@@ -86,7 +86,7 @@ p {
   margin: var(--gap) 0;
 }
 
-button {
+button, select {
   font-family: "Montserrat", sans-serif;
 }
 

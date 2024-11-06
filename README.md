@@ -56,4 +56,4 @@ The downside to this is that it obfuscates which parts of the JSX contains "actu
 Most 'normal' tests are co-located with the files that are tested except for performance testing
 
 #### Performance tests
-Performance testing is done in `src/tests`. The test sets found in `src/tests/sets` are derived from test sets by E.E. Bischoff and M.S.W. Ratcliff (1995). The only difference in my implementation is that information regarding allowed/disallowed rotations are omitted. The data was retrieved from the [Brunel OR-library](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/thpackinfo.html), specifically [here](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/thpackinfo.html).
+Performance testing is done in `src/problemSets`. The test sets found in `src/problemSets/BRSets` are derived from test sets by E.E. Bischoff and M.S.W. Ratcliff (1995). The only difference in my implementation is that information regarding allowed/disallowed rotations are omitted. The data was retrieved from the [Brunel OR-library](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/thpackinfo.html), specifically [here](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/thpackinfo.html).

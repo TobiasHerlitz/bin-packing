@@ -1,6 +1,8 @@
+import { ProblemSetModal } from '@components';
 import { Bin, Parcel } from '@entities';
 import { useGeometryDispatch, useGeometryState } from '@hooks';
 import { Button, ButtonColor, ButtonSize } from '@ui';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { BinInputs, ParcelInputs } from './components';
@@ -16,14 +18,24 @@ interface PackingControlsProps {
 }
 
 export const PackingControls = ({ closeControls }: PackingControlsProps) => {
-  const geometryState = useGeometryState();
+  const [showProblemSetModal, setShowProblemSetModal] = useState(false);
+  const { parcels, bins } = useGeometryState();
   const geometryDispatch = useGeometryDispatch();
+
+  console.log('Rendering packing controls');
   const form = useForm<FormInputs>({
     defaultValues: {
-      parcels: geometryState.parcels,
-      bins: geometryState.bins,
+      parcels: parcels,
+      bins: bins,
     },
   });
+  const { setValue, handleSubmit } = form;
+
+  // Force rerender on state change as defaultValues is cached
+  useEffect(() => {
+    setValue('parcels', parcels);
+    setValue('bins', bins);
+  }, [parcels, bins, setValue]);
 
   const pack: SubmitHandler<FormInputs> = (data) => {
     console.log('running pack');
@@ -43,54 +55,71 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
   };
 
   return (
-    <div className={styles.root}>
-      <div className={styles.header}>
-        <h2>PACKING</h2>
-        <Button
-          icon="close"
-          colorScheme={ButtonColor.BGColor}
-          onClick={(e) => {
-            e.preventDefault();
-            closeControls();
-          }}
-        />
-      </div>
-
-      <form onSubmit={form.handleSubmit(pack)}>
-        <ParcelInputs form={form} />
-        <BinInputs form={form} />
-        <div className={styles.bottomButtons}>
-          <div className={styles.spreadsheetButtons}>
+    <>
+      <div className={styles.packingControls}>
+        <div className={styles.header}>
+          <h2>PACKING</h2>
+          <Button
+            icon="close"
+            colorScheme={ButtonColor.BGColor}
+            onClick={(e) => {
+              e.preventDefault();
+              closeControls();
+            }}
+          />
+        </div>
+        <form onSubmit={handleSubmit(pack)}>
+          <ParcelInputs form={form} />
+          <BinInputs form={form} />
+          <div className={styles.bottomButtons}>
             <Button
-              text="Import spreadsheet"
+              text="Load problem set"
               size={ButtonSize.Medium}
               colorScheme={ButtonColor.BGColor}
               icon="upload"
               onClick={(e) => {
                 e.preventDefault();
-                console.log('Import spreadsheet');
+                setShowProblemSetModal(true);
               }}
             />
+            <div className={styles.spreadsheetButtons}>
+              <Button
+                text="Import spreadsheet"
+                size={ButtonSize.Medium}
+                colorScheme={ButtonColor.BGColor}
+                icon="upload"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Import spreadsheet');
+                }}
+              />
+              <Button
+                text="Export spreadsheet"
+                size={ButtonSize.Medium}
+                colorScheme={ButtonColor.BGColor}
+                icon="download"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Export spreadsheet');
+                }}
+              />
+            </div>
             <Button
-              text="Export spreadsheet"
-              size={ButtonSize.Medium}
-              colorScheme={ButtonColor.BGColor}
-              icon="download"
-              onClick={(e) => {
-                e.preventDefault();
-                console.log('Export spreadsheet');
-              }}
+              className={styles.submitButton}
+              type="submit"
+              text="CALCULATE"
+              size={ButtonSize.Large}
+              colorScheme={ButtonColor.Secondary}
             />
           </div>
-          <Button
-            className={styles.submitButton}
-            type="submit"
-            text="CALCULATE"
-            size={ButtonSize.Large}
-            colorScheme={ButtonColor.Secondary}
-          />
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+      <ProblemSetModal
+        show={showProblemSetModal}
+        closeModal={() => {
+          setShowProblemSetModal(false);
+        }}
+      />
+    </>
   );
 };

@@ -1,4 +1,4 @@
-import { Parcel } from '@entities';
+import { Bin, Parcel } from '@entities';
 import { createContext, Dispatch } from 'react';
 
 interface AddParcel {
@@ -11,11 +11,16 @@ interface SetParcels {
   payload: Parcel[];
 }
 
+interface SetBins {
+  type: 'setBins';
+  payload: Bin[];
+}
+
 interface Pack {
   type: 'pack';
 }
 
-export type GeometryActions = AddParcel | SetParcels | Pack;
+export type GeometryActions = AddParcel | SetParcels | SetBins | Pack;
 
 export const GeometryDispatchContext =
   createContext<Dispatch<GeometryActions> | null>(null);

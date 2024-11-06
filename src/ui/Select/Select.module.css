@@ -1,0 +1,30 @@
+.select {
+  border: none;
+  font-size: 14px;
+  background: var(--font-color);
+  border-radius: 100px;
+  padding: var(--gap) var(--gap-5) var(--gap) var(--gap-2);
+/*  text-transform: uppercase;*/
+  appearance:none;
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-0_5);
+
+  span {
+    margin-left: var(--gap-1_5);
+  }
+}
+
+.chevron {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%231B263B' height='20' viewBox='0 0 24 16'><path d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.chevron:disabled {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%236D6D6D' height='20' viewBox='0 0 24 16'><path d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/></svg>");
+}

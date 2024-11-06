@@ -1,0 +1,11 @@
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+  margin-top: var(--gap-3);
+}
+
+.loadButton {
+  align-self: flex-end;
+  margin-top: var(--gap);
+}

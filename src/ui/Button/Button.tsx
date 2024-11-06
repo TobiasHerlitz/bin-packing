@@ -1,7 +1,9 @@
+import { ButtonHTMLAttributes } from 'react';
+
 import styles from './Button.module.css';
 import { ButtonColor, ButtonSize } from './Button.types';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   text?: string;
   size?: ButtonSize;

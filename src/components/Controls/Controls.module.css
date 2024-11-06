@@ -30,12 +30,18 @@
   margin-top: var(--gap-2);
 }
 
-.body {
-  border-radius: var(--border-radius);
-  height: 100%;
+.paddingWrapper {
+  padding: var(--gap-3) 0;
   background: var(--bg-color);
-  padding: var(--gap-3);
-  padding-top: var(--gap-4);
+  border-radius: var(--border-radius);
+}
+
+.body {
+  height: 100%;
+  padding: 0 var(--gap-3);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--font-color) var(--bg-color);
 }
 
 .tabs button {

@@ -13,8 +13,10 @@ export function geometryReducer(
       return { ...state };
     }
     case 'setParcels': {
-      state.parcels = action.payload;
-      return { ...state };
+      return { ...state, parcels: action.payload };
+    }
+    case 'setBins': {
+      return { ...state, bins: action.payload };
     }
     case 'pack': {
       console.log('PACKING');

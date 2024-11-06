@@ -31,7 +31,8 @@
       "@utils": ["./src/utils"],
       "@ui": ["./src/ui"],
       "@style": ["./src/style"],
-      "@entities": ["./src/entities"]
+      "@entities": ["./src/entities"],
+      "@problemSets": ["./src/problemSets"]
     }
   },
   "include": ["src"],

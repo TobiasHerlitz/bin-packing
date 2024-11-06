@@ -16,8 +16,8 @@ interface Tab {
 }
 
 export const Controls = () => {
-  const [selectedTab, setSelectedTab] = useState<Tab>();
   const controlsRef = useRef(null);
+  const [selectedTab, setSelectedTab] = useState<Tab>();
 
   const tabs = [
     {
@@ -59,7 +59,9 @@ export const Controls = () => {
             ))}
           </div>
           {selectedTab && (
-            <div className={styles.body}>{selectedTab.component}</div>
+            <div className={styles.paddingWrapper}>
+              <div className={styles.body}>{selectedTab.component}</div>
+            </div>
           )}
         </div>
       </div>
