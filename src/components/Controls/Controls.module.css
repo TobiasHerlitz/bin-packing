@@ -36,6 +36,15 @@
   border-radius: var(--border-radius);
 }
 
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--gap-2);
+  gap: var(--gap-4);
+}
+
 .body {
   height: 100%;
   padding: 0 var(--gap-3);
@@ -45,8 +54,8 @@
 }
 
 .tabs button {
-  font-size: 50px;
-  padding: var(--gap-3) calc(var(--gap) * 0.5);
+  font-size: 46px;
+  padding: var(--gap-3) var(--gap);
   backdrop-filter: blur(10px);
   border: none;
   border-radius: var(--border-radius) 0 0 var(--border-radius);
@@ -54,7 +63,7 @@
   cursor: pointer;
 }
 
-.tabs button:nth-child(1) {
+.tabs button:nth-child(odd) {
   background-color: var(--secondary-color-3);
   color: var(--font-color);
 
@@ -64,7 +73,7 @@
   }
 }
 
-.tabs button:nth-child(2) {
+.tabs button:nth-child(even) {
   background-color: var(--tertiary-color-3);
   color: var(--font-color);
 

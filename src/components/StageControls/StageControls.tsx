@@ -8,7 +8,6 @@ export const StageControls = () => {
   const stageDispatch = useStageDispatch();
   return (
     <div className={styles.root}>
-      <h2>Stage Controls</h2>
       <div className={styles.actions}>
         <Toggle
           className={styles.toggle}

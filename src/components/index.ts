@@ -9,4 +9,5 @@ export { RoutingRoot } from './RoutingRoot';
 export { Scene } from './Scene';
 export { SceneHelpers } from './SceneHelpers';
 export { SelectedOverlay } from './SelectedOverlay';
+export { SolutionControls } from './SolutionControls';
 export { StageControls } from './StageControls';

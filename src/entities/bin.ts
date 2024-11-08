@@ -71,4 +71,18 @@ export class Bin {
       );
     }, 0);
   }
+
+  fillRate() {
+    const parcelVolume = this.parcels.reduce((carry, parcel) => {
+      carry += parcel.volume();
+      return carry;
+    }, 0);
+
+    return parcelVolume / this.volume();
+  }
+
+  isValid() {
+    return this.parcels.every((parcel) => this.fits(parcel));
+    // return true
+  }
 }

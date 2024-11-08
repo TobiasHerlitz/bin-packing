@@ -57,17 +57,6 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
   return (
     <>
       <div className={styles.packingControls}>
-        <div className={styles.header}>
-          <h2>PACKING</h2>
-          <Button
-            icon="close"
-            colorScheme={ButtonColor.BGColor}
-            onClick={(e) => {
-              e.preventDefault();
-              closeControls();
-            }}
-          />
-        </div>
         <form onSubmit={handleSubmit(pack)}>
           <ParcelInputs form={form} />
           <BinInputs form={form} />

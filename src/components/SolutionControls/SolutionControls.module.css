@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--gap-2);
+}
+
+.parcels {
+  display: flex;
+  flex-direction: column;
+}
+
+.bin {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.packingMetrics {
+  display: flex;
+  justify-content: space-between;
+}
