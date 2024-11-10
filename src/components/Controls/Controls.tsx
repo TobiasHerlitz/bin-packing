@@ -1,7 +1,7 @@
 import { PackingControls, SolutionControls, StageControls } from '@components';
 import { useClickOutside } from '@hooks';
 import { Button, ButtonColor } from '@ui';
-import { ReactNode, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import styles from './Controls.module.css';
 
@@ -44,6 +44,10 @@ export const Controls = () => {
       component: <StageControls />,
     },
   ];
+
+  useEffect(() => {
+    setSelectedTab(tabs[1])
+  }, [])
 
   useClickOutside({
     refs: [controlsRef],
