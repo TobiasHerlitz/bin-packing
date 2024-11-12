@@ -36,7 +36,6 @@ export const multipleContainersMinimizeCost = (
   buildLayer(layer, layerGroupings[0].parcels);
 
   bins[0].parcels = layer.parcels;
-  console.log(bins[0].parcels);
   return bins[0];
 };
 

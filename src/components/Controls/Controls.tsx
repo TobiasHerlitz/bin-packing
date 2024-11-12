@@ -46,7 +46,7 @@ export const Controls = () => {
   ];
 
   useEffect(() => {
-    setSelectedTab(tabs[1])
+    setSelectedTab(tabs[0])
   }, [])
 
   useClickOutside({
@@ -74,21 +74,19 @@ export const Controls = () => {
             ))}
           </div>
           {selectedTab && (
-            <div className={styles.paddingWrapper}>
-              <div className={styles.body}>
-                <div className={styles.header}>
-                  <h2>{selectedTab.heading}</h2>
-                  <Button
-                    icon="close"
-                    colorScheme={ButtonColor.BGColor}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setSelectedTab(undefined);
-                    }}
-                  />
-                </div>
-                {selectedTab.component}
+            <div className={styles.body}>
+              <div className={styles.header}>
+                <h2>{selectedTab.heading}</h2>
+                <Button
+                  icon="close"
+                  colorScheme={ButtonColor.BGColor}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedTab(undefined);
+                  }}
+                />
               </div>
+              {selectedTab.component}
             </div>
           )}
         </div>

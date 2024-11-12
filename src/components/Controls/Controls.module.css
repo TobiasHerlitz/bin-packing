@@ -30,12 +30,6 @@
   margin-top: var(--gap-2);
 }
 
-.paddingWrapper {
-  padding: var(--gap-3) 0;
-  background: var(--bg-color);
-  border-radius: var(--border-radius);
-}
-
 .header {
   display: flex;
   width: 100%;
@@ -48,6 +42,11 @@
 
 .body {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--gap-3);
+  background: var(--bg-color);
+  border-radius: var(--border-radius);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--font-color) var(--bg-color);

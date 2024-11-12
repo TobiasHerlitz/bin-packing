@@ -56,53 +56,53 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
 
   return (
     <>
-      <div className={styles.packingControls}>
-        <form onSubmit={handleSubmit(pack)}>
+      <form className={styles.packingControls} onSubmit={handleSubmit(pack)}>
+        <div>
           <ParcelInputs form={form} />
           <BinInputs form={form} />
-          <div className={styles.bottomButtons}>
+        </div>
+        <div className={styles.bottomButtons}>
+          <Button
+            text="Load problem set"
+            size={ButtonSize.Medium}
+            colorScheme={ButtonColor.BGColor}
+            icon="upload"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowProblemSetModal(true);
+            }}
+          />
+          <div className={styles.spreadsheetButtons}>
             <Button
-              text="Load problem set"
+              text="Import spreadsheet"
               size={ButtonSize.Medium}
               colorScheme={ButtonColor.BGColor}
               icon="upload"
               onClick={(e) => {
                 e.preventDefault();
-                setShowProblemSetModal(true);
+                console.log('Import spreadsheet');
               }}
             />
-            <div className={styles.spreadsheetButtons}>
-              <Button
-                text="Import spreadsheet"
-                size={ButtonSize.Medium}
-                colorScheme={ButtonColor.BGColor}
-                icon="upload"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log('Import spreadsheet');
-                }}
-              />
-              <Button
-                text="Export spreadsheet"
-                size={ButtonSize.Medium}
-                colorScheme={ButtonColor.BGColor}
-                icon="download"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log('Export spreadsheet');
-                }}
-              />
-            </div>
             <Button
-              className={styles.submitButton}
-              type="submit"
-              text="CALCULATE"
-              size={ButtonSize.Large}
-              colorScheme={ButtonColor.Secondary}
+              text="Export spreadsheet"
+              size={ButtonSize.Medium}
+              colorScheme={ButtonColor.BGColor}
+              icon="download"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log('Export spreadsheet');
+              }}
             />
           </div>
-        </form>
-      </div>
+          <Button
+            className={styles.submitButton}
+            type="submit"
+            text="CALCULATE"
+            size={ButtonSize.Large}
+            colorScheme={ButtonColor.Secondary}
+          />
+        </div>
+      </form>
       <ProblemSetModal
         show={showProblemSetModal}
         closeModal={() => {

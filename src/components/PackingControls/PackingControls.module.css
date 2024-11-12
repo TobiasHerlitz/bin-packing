@@ -4,28 +4,15 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 var(--gap-3);
-
-  form {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.header {
-  display: flex;
-  width: 100%;
   justify-content: space-between;
-  align-items: center;
-  padding-bottom: var(--gap-2);
+  padding: 0 var(--gap-3);
 }
 
 .bottomButtons {
-  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: var(--gap);
+  padding-bottom: var(--gap-3);
 
   div {
     display: flex;
