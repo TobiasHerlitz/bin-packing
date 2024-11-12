@@ -1,7 +1,7 @@
 import { Bin, Parcel } from '@entities';
 import { createLayerGroupings } from '@utils';
 
-import { buildLayer } from './buildLayer';
+import { buildLayers } from './buildLayers';
 
 export const multipleContainersMinimizeCost = (
   bins: Bin[],
@@ -24,19 +24,34 @@ export const multipleContainersMinimizeCost = (
 
   const layerGroupings = createLayerGroupings(parcels);
 
-  const layer = new Bin({
-    name: 'Layer',
-    size: {
-      width: bins[0].size.width,
-      height: layerGroupings[0].height,
-      depth: bins[0].size.depth,
-    },
-  });
-
-  buildLayer(layer, layerGroupings[0].parcels);
-
-  bins[0].parcels = layer.parcels;
+  const layers = buildLayers(bins[0], layerGroupings[0].parcels);
+  combineLayers(bins, layers);
+  // bins[0].parcels = layers[0].parcels;
   return bins[0];
+};
+
+const combineLayers = (bins: Bin[], layers: Bin[]) => {
+  const bin = bins[0];
+  let pivotY = 0;
+
+  layers.forEach((layer) => {
+    // if (pivotY + layer.size.height > bin.size.height) {
+    //   throw new Error('This is where a new bin would be added')
+    // }
+
+    const shiftedParcels = layer.parcels.map((parcel) => {
+      const { x, y, z } = parcel.getPosition();
+      parcel.setPosition({
+        x,
+        y: y + pivotY,
+        z,
+      });
+      return parcel;
+    });
+
+    bin.parcels.push(...shiftedParcels);
+    pivotY += layer.size.height;
+  });
 };
 
 export const allParcelsPlaced = (bins: Bin[], parcels: Parcel[]) => {

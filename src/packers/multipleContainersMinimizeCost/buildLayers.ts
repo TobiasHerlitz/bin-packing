@@ -7,8 +7,18 @@ Dimensions can be assigned arbitrarily. w, h, d. Depth is parallell to the x axi
 import { Bin, Parcel } from '@entities';
 import { sortByDepth } from '@utils';
 
-export const buildLayer = (layer: Bin, parcels: Parcel[]) => {
-  return bestFitDescending(layer, parcels);
+const validateParcelHeight = (parcels: Parcel[]) => {
+  const uniqueHeights = new Set(
+    parcels.map((parcel) => parcel.getRotatedSize().height)
+  );
+  if (uniqueHeights.size > 1) {
+    throw new Error('Rotated height must be the same on all parcels');
+  }
+};
+
+export const buildLayers = (bin: Bin, parcels: Parcel[]) => {
+  validateParcelHeight(parcels);
+  return bestFitDescending(bin, parcels);
 };
 
 const placeParcel = (shelf: Bin, parcel: Parcel) => {
@@ -28,7 +38,7 @@ const placeParcel = (shelf: Bin, parcel: Parcel) => {
   return false;
 };
 
-const bestFitDescending = (layer: Bin, parcels: Parcel[]) => {
+const bestFitDescending = (bin: Bin, parcels: Parcel[]) => {
   parcels.forEach((parcel) => {
     const { width, depth } = parcel.getRotatedSize();
     if (depth < width) {
@@ -37,11 +47,11 @@ const bestFitDescending = (layer: Bin, parcels: Parcel[]) => {
   });
   const sortedParcels = sortByDepth(parcels);
 
-  const shelves = placeIntoShelves(layer, sortedParcels);
-  return combineShelves(layer, shelves);
+  const shelves = placeIntoShelves(bin, sortedParcels);
+  return combineShelves(bin, shelves);
 };
 
-const placeIntoShelves = (layer: Bin, parcels: Parcel[]) => {
+const placeIntoShelves = (bin: Bin, parcels: Parcel[]) => {
   const shelves: Bin[] = [];
   parcels.forEach((parcel) => {
     shelves.some((shelf) => {
@@ -51,8 +61,8 @@ const placeIntoShelves = (layer: Bin, parcels: Parcel[]) => {
       return;
     }
 
-    const { width, depth } = parcel.getRotatedSize();
-    if (width > layer.size.width) {
+    const { width, depth, height } = parcel.getRotatedSize();
+    if (width > bin.size.width) {
       throw new Error(
         'Cannot create shelf that would hold next parcel without exceeding layer width'
       );
@@ -60,8 +70,8 @@ const placeIntoShelves = (layer: Bin, parcels: Parcel[]) => {
 
     const newShelf = new Bin({
       size: {
-        width: layer.size.width,
-        height: layer.size.height,
+        width: bin.size.width,
+        height,
         depth,
       },
     });
@@ -78,9 +88,31 @@ const placeIntoShelves = (layer: Bin, parcels: Parcel[]) => {
   return shelves;
 };
 
-const combineShelves = (layer: Bin, shelves: Bin[]) => {
+const combineShelves = (bin: Bin, shelves: Bin[]) => {
   let pivotZ = 0;
+  const layers = [
+    new Bin({
+      size: {
+        width: bin.size.width,
+        height: shelves[0].size.height,
+        depth: bin.size.height,
+      },
+    }),
+  ];
+
   shelves.forEach((shelf) => {
+    if (pivotZ + shelf.size.depth > bin.size.depth) {
+      layers.push(
+        new Bin({
+          size: {
+            width: bin.size.width,
+            height: shelves[0].size.height,
+            depth: bin.size.height,
+          },
+        })
+      );
+      pivotZ = 0;
+    }
     const shiftedParcels = shelf.parcels.map((parcel) => {
       const { x, y, z } = parcel.getPosition();
       parcel.setPosition({
@@ -90,9 +122,12 @@ const combineShelves = (layer: Bin, shelves: Bin[]) => {
       });
       return parcel;
     });
-    layer.parcels.push(...shiftedParcels);
+    // Push to last layer of layers
+    layers[layers.length - 1].parcels.push(...shiftedParcels);
     pivotZ += shelf.size.depth;
   });
+
+  return layers;
 };
 
 // FiniteBestStrip
