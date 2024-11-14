@@ -1,16 +1,18 @@
 import { ProblemSetModal } from '@components';
 import { Bin, Parcel } from '@entities';
 import { useGeometryDispatch, useGeometryState } from '@hooks';
+import { PackingInstructions as PackingInstructionsType } from '@types';
 import { Button, ButtonColor, ButtonSize } from '@ui';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { BinInputs, ParcelInputs } from './components';
+import { BinInputs, PackingInstructions, ParcelInputs } from './components';
 import styles from './PackingControls.module.css';
 
 export interface FormInputs {
   parcels: Parcel[];
   bins: Bin[];
+  packingInstructions: PackingInstructionsType;
 }
 
 interface PackingControlsProps {
@@ -22,11 +24,14 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
   const { parcels, bins } = useGeometryState();
   const geometryDispatch = useGeometryDispatch();
 
-  console.log('Rendering packing controls');
   const form = useForm<FormInputs>({
     defaultValues: {
       parcels: parcels,
       bins: bins,
+      packingInstructions: {
+        rotationAllowed: true,
+        useMultipleBins: true,
+      },
     },
   });
   const { setValue, handleSubmit } = form;
@@ -60,6 +65,7 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
         <div>
           <ParcelInputs form={form} />
           <BinInputs form={form} />
+          <PackingInstructions form={form} />
         </div>
         <div className={styles.bottomButtons}>
           <Button

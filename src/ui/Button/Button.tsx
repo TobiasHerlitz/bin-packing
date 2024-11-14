@@ -12,6 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const buttonSizeToClass: Record<ButtonSize, string> = {
+  [ButtonSize.XSmall]: styles.xSmall,
   [ButtonSize.Small]: styles.small,
   [ButtonSize.Medium]: styles.medium,
   [ButtonSize.Large]: styles.large,
@@ -43,9 +44,7 @@ export const Button = ({
     >
       {size !== ButtonSize.Small && <span>{text}</span>}
       {size !== ButtonSize.Large && (
-        <span
-          className={`${size === ButtonSize.Small ? styles.iconSmall : styles.icon} material-symbols-outlined`}
-        >
+        <span className={`${styles.icon} material-symbols-outlined`}>
           {icon}
         </span>
       )}

@@ -256,4 +256,9 @@ export class Parcel {
     const { width, height, depth } = this.originalSize;
     return width * height * depth;
   }
+
+  reset() {
+    this.#rotation = undefined;
+    this.#position = undefined;
+  }
 }

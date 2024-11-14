@@ -5,9 +5,7 @@
   text-transform: uppercase;
   gap: var(--gap-2);
   font-weight: 500;
-  cursor: pointer;
   user-select: none;
-/*  width: fit-content;*/
 }
 
 .toggle {
@@ -26,6 +24,11 @@
 
 .toggle:checked {
   background: var(--secondary-color-1);
+}
+
+.toggle:disabled {
+  cursor: not-allowed;
+  background: var(--disabled-color);
 }
 
 .toggle::after {

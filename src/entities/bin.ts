@@ -85,4 +85,8 @@ export class Bin {
     return this.parcels.every((parcel) => this.fits(parcel));
     // return true
   }
+
+  reset() {
+    this.parcels = [];
+  }
 }

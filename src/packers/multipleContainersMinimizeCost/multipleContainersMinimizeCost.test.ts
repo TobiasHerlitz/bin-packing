@@ -75,3 +75,24 @@ test('mcmc can pack multiple horizontal layers into one bin', () => {
   expect(packedBin.parcels.length).toBe(8);
   expect(packedBin.isValid()).toBe(true);
 });
+
+test('clears parcels between packing', () => {
+  const bin = new Bin({
+    size: {
+      width: 20,
+      height: 20,
+      depth: 20,
+    },
+  });
+
+  const parcels = createMultipleParcels(
+    { width: 10, height: 10, depth: 10 },
+    8
+  );
+
+  multipleContainersMinimizeCost([bin], parcels);
+  const packedBin = multipleContainersMinimizeCost([bin], parcels);
+
+  expect(packedBin.parcels.length).toBe(8);
+  expect(packedBin.isValid()).toBe(true);
+});

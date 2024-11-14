@@ -12,7 +12,7 @@
   width: fit-content;
 }
 
-.small {
+.xSmall {
   height: 34px;
   width: 34px;
   color: white;
@@ -22,6 +22,19 @@
 
   span {
     font-size: 24px;
+  }
+}
+
+.small {
+  height: 28px;
+  width: 28px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 20px;
   }
 }
 

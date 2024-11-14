@@ -1,4 +1,5 @@
 export { Bin } from './Bin';
+export { BinsOverlay } from './BinsOverlay';
 export { ColorThemeToggle } from './ColorThemeToggle';
 export { Controls } from './Controls';
 export { ExampleComponent } from './ExampleComponent';

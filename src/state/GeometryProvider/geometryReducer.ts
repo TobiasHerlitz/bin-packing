@@ -19,8 +19,8 @@ export function geometryReducer(
       return { ...state, bins: action.payload };
     }
     case 'pack': {
-      console.log('PACKING');
       const clonedParcels = state.parcels.map((parcel) => parcel.clone());
+      state.bins.forEach((bin) => bin.reset());
       const bin = multipleContainersMinimizeCost(state.bins, clonedParcels);
       return { ...state, bins: [bin] };
     }

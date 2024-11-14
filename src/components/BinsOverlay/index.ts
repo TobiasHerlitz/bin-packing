@@ -1,0 +1,1 @@
+export { BinsOverlay } from './BinsOverlay';

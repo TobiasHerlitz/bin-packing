@@ -1,14 +1,25 @@
-import { ReactNode } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 import styles from './Toggle.module.css';
 
-interface ToggleProps {
-  checked: boolean;
-  onChange: () => void;
-  id: string;
+interface SharedProps extends InputHTMLAttributes<HTMLInputElement> {
   children: ReactNode;
   className?: string;
+  id: string;
 }
+
+type UncontrolledToggleProps = SharedProps & {
+  checked: boolean;
+  onChange: () => void;
+  register?: undefined;
+};
+
+type FormToggleProps = SharedProps & {
+  checked?: undefined;
+  onChange?: undefined;
+  register: UseFormRegisterReturn<string>;
+};
 
 export const Toggle = ({
   checked,
@@ -16,18 +27,24 @@ export const Toggle = ({
   id,
   children,
   className,
-}: ToggleProps) => {
+  register,
+  ...props
+}: UncontrolledToggleProps | FormToggleProps) => {
   return (
-    <label className={`${className} ${styles.root}`}>
-      {children}
+    <div className={`${styles.root} ${className}`}>
+      <label htmlFor={id} onClick={(e) => e.preventDefault()}>
+        {children}
+      </label>
       <input
-        className={styles.toggle}
+        {...register}
+        {...props}
+        className={`${styles.toggle}`}
         type="checkbox"
         id={id}
         name={id}
         checked={checked}
         onChange={onChange}
       />
-    </label>
+    </div>
   );
 };

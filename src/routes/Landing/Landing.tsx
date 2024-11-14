@@ -1,4 +1,4 @@
-import { Controls, Scene, SelectedOverlay } from '@components';
+import { BinsOverlay, Controls, Scene, SelectedOverlay } from '@components';
 import { GeometryProvider, StageProvider } from '@state';
 
 export const Landing = () => {
@@ -8,6 +8,7 @@ export const Landing = () => {
         <Scene />
         <Controls />
         <SelectedOverlay />
+        <BinsOverlay />
       </GeometryProvider>
     </StageProvider>
   );
