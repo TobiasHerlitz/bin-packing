@@ -1,10 +1,11 @@
 import { Bin, Parcel } from '@entities';
 
-export interface BRProblem {
+export interface PackingProblem {
   problemNumber: number;
-  seed: number;
   bin: Bin;
   parcels: Parcel[];
 }
 
-export type BRProblemSet = BRProblem[];
+export type BRProblem = PackingProblem & {
+  seed: number;
+};

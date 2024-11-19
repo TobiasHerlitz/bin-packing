@@ -1,4 +1,4 @@
-import { BRProblemSet } from '@types';
+import { BRProblem } from '@types';
 
 import { problemSet1 } from './problemSet1';
 import { problemSet2 } from './problemSet2';
@@ -8,7 +8,7 @@ import { problemSet5 } from './problemSet5';
 import { problemSet6 } from './problemSet6';
 import { problemSet7 } from './problemSet7';
 
-export const BRSets: Record<string, BRProblemSet> = {
+export const BRSets: Record<string, BRProblem[]> = {
   BR1: problemSet1,
   BR2: problemSet2,
   BR3: problemSet3,

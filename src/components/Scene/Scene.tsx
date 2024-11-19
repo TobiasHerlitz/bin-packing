@@ -1,7 +1,12 @@
 import { Bin, SceneHelpers } from '@components';
 import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { useSelectedBin, useStageDispatch, useStageState } from '@stateHooks';
+import {
+  useGeometryDispatch,
+  useSelectedBin,
+  useStageDispatch,
+  useStageState,
+} from '@stateHooks';
 import { Perf } from 'r3f-perf';
 import { useEffect, useRef } from 'react';
 
@@ -12,6 +17,12 @@ export const Scene = () => {
   const selectedBin = useSelectedBin();
   const { showScene, showPerformance } = useStageState();
   const stageDispatch = useStageDispatch();
+  const geometryDispatch = useGeometryDispatch();
+
+  // Pack initial state on first render during development to improve DX
+  useEffect(() => {
+    geometryDispatch({ type: 'pack' });
+  }, [geometryDispatch]);
 
   useEffect(() => {
     if (!cameraRef) return;
@@ -25,7 +36,7 @@ export const Scene = () => {
   return (
     <div className={styles.canvasWrapper}>
       <Canvas shadows camera={{ position: [2, 2, 2] }}>
-        {showPerformance && <Perf position="bottom-left" />}
+        {showPerformance && <Perf position="bottom-right" />}
         <SceneHelpers />
         <RandomizedLight amount={8} frames={100} position={[5, 5, -10]} />
         <hemisphereLight intensity={1} />

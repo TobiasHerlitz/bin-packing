@@ -4,7 +4,21 @@ import { Coordinate } from '@types';
 import { sizeToMeters } from '@utils';
 import { BackSide } from 'three';
 
-const parcelColors = ['#001B2E', '#294C60', '#ADB6C4', '#FFEFD3', '#FFC49B'];
+const parcelColors = [
+  '#9FE7F5',
+  '#429EBD',
+  '#053F5C',
+  '#F7AD19',
+  '#F27F0C',
+  '#f5983c',
+  '#f7b26d',
+  '#facb9d',
+  '#fce5ce',
+  '#d954c5',
+  '#e27ed3',
+  '#eba8e1',
+  '#f5d1ef',
+];
 
 interface BinProps {
   bin: BinEntity;
@@ -20,7 +34,7 @@ export const Bin = ({ bin, position }: BinProps) => {
     <Parcel
       id={parcel.id}
       key={parcel.name}
-      color={parcelColors[index % 4]}
+      color={parcelColors[index % parcelColors.length]}
       size={sizeToMeters(parcel.getRotatedSize())}
       position={{
         x: (parcel.getPosition().x + parcel.getRotatedSize().width / 2) / 100,

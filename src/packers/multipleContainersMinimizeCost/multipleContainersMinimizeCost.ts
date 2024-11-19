@@ -21,8 +21,8 @@ export const multipleContainersMinimizeCost = (
 
   // Selection of Optimal Patterns:
   // Chose patterns based on both packing efficiency and cost minimization while refining the solution.
-
-  const layerGroupings = createLayerGroupings(parcels);
+  const flattenedParcels = parcels.map((parcel) => parcel.flatten()).flat();
+  const layerGroupings = createLayerGroupings(flattenedParcels);
 
   const layers: Bin[] = [];
   layerGroupings.forEach(({ parcels }) => {

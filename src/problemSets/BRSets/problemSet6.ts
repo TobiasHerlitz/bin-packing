@@ -1,7 +1,7 @@
 import { Bin, Parcel } from '@entities';
-import { BRProblemSet } from '@types';
+import { BRProblem } from '@types';
 
-export const problemSet6: BRProblemSet = [
+export const problemSet6: BRProblem[] = [
   {
     problemNumber: 1,
     seed: 2502505,

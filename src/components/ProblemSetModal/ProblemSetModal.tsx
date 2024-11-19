@@ -1,5 +1,6 @@
-import { BRSets } from '@problemSets';
+import { BRSets, customSets } from '@problemSets';
 import { useGeometryDispatch } from '@stateHooks';
+import { PackingProblem } from '@types';
 import { Button, ButtonColor, ButtonSize, Modal, Select } from '@ui';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -31,6 +32,10 @@ export const ProblemSetModal = ({ show, closeModal }: ProblemSetModalProps) => {
       value: '',
     },
     {
+      label: 'Custom sets - Set 1',
+      value: 'custom1',
+    },
+    {
       label: 'Bischoff & Ratcliff - Set 1',
       value: 'BR1',
     },
@@ -60,7 +65,8 @@ export const ProblemSetModal = ({ show, closeModal }: ProblemSetModalProps) => {
     },
   ];
 
-  const problemSet = watch('problemSet');
+  const problemSetValue = watch('problemSet');
+  const problemSet = { ...BRSets, ...customSets }[problemSetValue];
 
   const problemOptions = [
     {
@@ -68,7 +74,7 @@ export const ProblemSetModal = ({ show, closeModal }: ProblemSetModalProps) => {
       value: '',
     },
     ...(problemSet
-      ? new Array(10)
+      ? new Array(problemSet.length > 10 ? 10 : problemSet.length)
           .fill(null)
           .map((_, i) => ({ label: `Problem ${i + 1}`, value: i + 1 }))
       : []),
@@ -78,9 +84,9 @@ export const ProblemSetModal = ({ show, closeModal }: ProblemSetModalProps) => {
     problemSet,
     problem,
   }) => {
-    const selectedSet = BRSets[problemSet];
+    const selectedSet = { ...BRSets, ...customSets }[problemSet];
     const selectedProblem = selectedSet.find(
-      ({ problemNumber }) => Number(problem) === problemNumber
+      ({ problemNumber }: PackingProblem) => Number(problem) === problemNumber
     );
     if (!selectedProblem) {
       console.error('Could not find problem');

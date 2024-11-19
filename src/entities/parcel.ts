@@ -55,6 +55,19 @@ export class Parcel {
     });
   }
 
+  /**
+   * Create an array of individual parcels from a template parcel where quantity might be greater than one
+   */
+  flatten() {
+    return new Array(this.quantity).fill(null).map(
+      (_, index) =>
+        new Parcel({
+          name: `${this.name} (${index + 1})`,
+          originalSize: this.originalSize,
+        })
+    );
+  }
+
   isRotated() {
     return !!this.#rotation;
   }

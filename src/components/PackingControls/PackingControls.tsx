@@ -50,7 +50,7 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
           new Parcel({
             name: parcel.name,
             originalSize: parcel.originalSize,
-            quantity: parcel.quantity,
+            quantity: Number(parcel.quantity),
           })
       ),
     });
