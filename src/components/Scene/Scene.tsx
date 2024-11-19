@@ -3,6 +3,7 @@ import { CameraControls, RandomizedLight, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import {
   useGeometryDispatch,
+  useGeometryState,
   useSelectedBin,
   useStageDispatch,
   useStageState,
@@ -18,11 +19,14 @@ export const Scene = () => {
   const { showScene, showPerformance } = useStageState();
   const stageDispatch = useStageDispatch();
   const geometryDispatch = useGeometryDispatch();
+  const { bins, parcels } = useGeometryState();
 
   // Pack initial state on first render during development to improve DX
   useEffect(() => {
-    geometryDispatch({ type: 'pack' });
-  }, [geometryDispatch]);
+    if (bins && parcels && bins.every((({parcels}) => !parcels.length))) {
+      geometryDispatch({ type: 'pack' });
+    }
+  }, []);
 
   useEffect(() => {
     if (!cameraRef) return;
@@ -33,6 +37,7 @@ export const Scene = () => {
   if (!showScene) {
     return null;
   }
+
   return (
     <div className={styles.canvasWrapper}>
       <Canvas shadows camera={{ position: [2, 2, 2] }}>
