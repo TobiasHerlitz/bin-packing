@@ -206,9 +206,6 @@ export class Parcel {
    * Checks if proposed parcel intersect with instance at proposed position
    */
   intersects(parcel: Parcel) {
-    if (parcel.name === 'Item three') {
-      console.log('any');
-    }
     return (
       this.rectIntersect(parcel, Axis.Width, Axis.Height) &&
       this.rectIntersect(parcel, Axis.Height, Axis.Depth) &&

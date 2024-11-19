@@ -8,7 +8,6 @@ export interface StageState {
   showGrid: boolean;
   showPerformance: boolean;
   showScene: boolean;
-  selectedParcel?: string;
   cameraRef?: MutableRefObject<CameraControls | null>;
 }
 

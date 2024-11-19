@@ -1,4 +1,4 @@
-import { useStageState } from '@hooks';
+import { useStageState } from '@stateHooks';
 
 export const SceneHelpers = () => {
   const sceneState = useStageState();

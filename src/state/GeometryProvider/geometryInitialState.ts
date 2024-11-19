@@ -118,6 +118,8 @@ const exampleBins = [
 ];
 
 export const geometryInitialState: GeometryState = {
+  selectedBinId: undefined,
+  selectedParcelId: undefined,
   parcels: [
     ...exampleParcelsWith40Height,
     ...exampleParcelsWith90sides,

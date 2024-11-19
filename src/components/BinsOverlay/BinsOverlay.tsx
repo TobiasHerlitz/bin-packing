@@ -1,4 +1,4 @@
-import { useGeometryState } from '@hooks';
+import { useGeometryDispatch, useGeometryState } from '@stateHooks';
 import { Button, ButtonColor } from '@ui';
 import { useState } from 'react';
 
@@ -6,9 +6,10 @@ import styles from './BinsOverlay.module.css';
 
 export const BinsOverlay = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const geometryState = useGeometryState();
+  const { bins, selectedBinId } = useGeometryState();
+  const geometryDispatch = useGeometryDispatch();
 
-  const packedBins = geometryState.bins.filter((bin) => bin.parcels.length > 0);
+  const packedBins = bins.filter((bin) => bin.parcels.length > 0);
   if (!packedBins.length) {
     return null;
   }
@@ -45,8 +46,19 @@ export const BinsOverlay = () => {
                 <td>{bin.size.height}</td>
                 <td>{bin.size.depth}</td>
                 <td>{(bin.fillRate() * 100).toPrecision(3)}%</td>
-                <td>
-                  <Button icon="visibility" colorScheme={ButtonColor.BGColor} />
+                <td className={styles.showBin}>
+                  <input
+                    defaultChecked={selectedBinId === bin.id}
+                    type="radio"
+                    name="shownBin"
+                    value={bin.id}
+                    onChange={(e) =>
+                      geometryDispatch({
+                        type: 'setSelectedBinId',
+                        binId: e.target.value,
+                      })
+                    }
+                  />
                 </td>
               </tr>
             ))}

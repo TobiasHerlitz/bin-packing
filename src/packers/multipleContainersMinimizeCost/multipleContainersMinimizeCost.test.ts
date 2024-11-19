@@ -28,11 +28,11 @@ test('mcmc can pack one parcel into a bin', () => {
     }),
   ];
 
-  const packedBin = multipleContainersMinimizeCost([bin], parcels);
+  const packedBins = multipleContainersMinimizeCost([bin], parcels);
 
-  expect(packedBin.parcels.length).toBe(1);
-  expect(packedBin.isValid()).toBe(true);
-  expect(packedBin.fillRate()).toBe(1 / 8);
+  expect(packedBins[0].parcels.length).toBe(1);
+  expect(packedBins[0].isValid()).toBe(true);
+  expect(packedBins[0].fillRate()).toBe(1 / 8);
 });
 
 test('mcmc can pack multiple parcels into one layer', () => {
@@ -49,11 +49,11 @@ test('mcmc can pack multiple parcels into one layer', () => {
     4
   );
 
-  const packedBin = multipleContainersMinimizeCost([bin], parcels);
+  const packedBins = multipleContainersMinimizeCost([bin], parcels);
 
-  expect(packedBin.parcels.length).toBe(4);
-  expect(packedBin.isValid()).toBe(true);
-  expect(packedBin.fillRate()).toBe(0.5);
+  expect(packedBins[0].parcels.length).toBe(4);
+  expect(packedBins[0].isValid()).toBe(true);
+  expect(packedBins[0].fillRate()).toBe(0.5);
 });
 
 test('mcmc can pack multiple horizontal layers into one bin', () => {
@@ -70,13 +70,13 @@ test('mcmc can pack multiple horizontal layers into one bin', () => {
     8
   );
 
-  const packedBin = multipleContainersMinimizeCost([bin], parcels);
+  const packedBins = multipleContainersMinimizeCost([bin], parcels);
 
-  expect(packedBin.parcels.length).toBe(8);
-  expect(packedBin.isValid()).toBe(true);
+  expect(packedBins[0].parcels.length).toBe(8);
+  expect(packedBins[0].isValid()).toBe(true);
 });
 
-test('clears parcels between packing', () => {
+test('mcmc can pack multiple horizontal layers into several bins', () => {
   const bin = new Bin({
     size: {
       width: 20,
@@ -87,12 +87,14 @@ test('clears parcels between packing', () => {
 
   const parcels = createMultipleParcels(
     { width: 10, height: 10, depth: 10 },
-    8
+    12
   );
 
-  multipleContainersMinimizeCost([bin], parcels);
-  const packedBin = multipleContainersMinimizeCost([bin], parcels);
+  const packedBins = multipleContainersMinimizeCost([bin], parcels);
 
-  expect(packedBin.parcels.length).toBe(8);
-  expect(packedBin.isValid()).toBe(true);
+  expect(packedBins[0].parcels.length).toBe(8);
+  expect(packedBins[0].isValid()).toBe(true);
+
+  expect(packedBins[1].parcels.length).toBe(4);
+  expect(packedBins[1].isValid()).toBe(true);
 });

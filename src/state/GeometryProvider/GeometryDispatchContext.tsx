@@ -20,7 +20,23 @@ interface Pack {
   type: 'pack';
 }
 
-export type GeometryActions = AddParcel | SetParcels | SetBins | Pack;
+interface SetSelectedBinId {
+  type: 'setSelectedBinId';
+  binId?: string;
+}
+
+interface SetSelectedParcelId {
+  type: 'setSelectedParcelId';
+  parcelId?: string;
+}
+
+export type GeometryActions =
+  | AddParcel
+  | SetParcels
+  | SetBins
+  | Pack
+  | SetSelectedBinId
+  | SetSelectedParcelId;
 
 export const GeometryDispatchContext =
   createContext<Dispatch<GeometryActions> | null>(null);

@@ -27,7 +27,6 @@ export function bestBin(bins: Bin[], items: Parcel[]) {
       return true;
     });
   });
-  console.log(bins[0]);
   return bins[0];
   // Get best filling ratio of all bins
   // Select bin with highest filling ratio

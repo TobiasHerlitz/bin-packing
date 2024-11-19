@@ -25,6 +25,7 @@
       "@components": ["./src/components"],
       "@routes": ["./src/routes"],
       "@hooks": ["./src/hooks"],
+      "@stateHooks": ["./src/hooks/state"],
       "@types": ["./src/types"],
       "@state": ["./src/state"],
       "@packers": ["./src/packers"],

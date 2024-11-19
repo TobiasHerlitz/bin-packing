@@ -14,11 +14,6 @@ interface ToggleScene {
   type: 'toggleScene';
 }
 
-interface SelectParcel {
-  type: 'selectParcel';
-  parcelName?: string;
-}
-
 interface SetCameraRef {
   type: 'setCameraRef';
   cameraRef?: MutableRefObject<CameraControls | null>;
@@ -28,7 +23,6 @@ export type StageActions =
   | ToggleGrid
   | TogglePerformance
   | ToggleScene
-  | SelectParcel
   | SetCameraRef;
 
 export const StageDispatchContext =

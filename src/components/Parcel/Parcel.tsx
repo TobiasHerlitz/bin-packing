@@ -1,39 +1,37 @@
-import { useStageDispatch, useStageState } from '@hooks';
 import { ThreeEvent } from '@react-three/fiber';
+import { useGeometryDispatch, useGeometryState } from '@stateHooks';
 import { Coordinate, Size } from '@types';
 
 interface ParcelProps {
   size: Size;
   position: Coordinate;
   color?: string;
-  name: string;
+  id: string;
 }
 
-export const Parcel = ({ size, position, color, name }: ParcelProps) => {
+export const Parcel = ({ size, position, color, id }: ParcelProps) => {
   const { width, height, depth } = size;
   const { x, y, z } = position;
-  const sceneState = useStageState();
-  const sceneDispatch = useStageDispatch();
+  const { selectedParcelId } = useGeometryState();
+  const geometryDispatch = useGeometryDispatch();
 
-  const hideParcel =
-    sceneState.selectedParcel !== undefined &&
-    name !== sceneState.selectedParcel;
+  const hideParcel = selectedParcelId !== undefined && id !== selectedParcelId;
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    if (name === sceneState.selectedParcel) {
-      sceneDispatch({ type: 'selectParcel', parcelName: undefined });
+    if (id === selectedParcelId) {
+      geometryDispatch({ type: 'setSelectedParcelId', parcelId: undefined });
       return;
     }
 
-    sceneDispatch({ type: 'selectParcel', parcelName: name });
+    geometryDispatch({ type: 'setSelectedParcelId', parcelId: id });
   };
 
   return (
     <mesh
       onPointerMissed={() =>
-        name === sceneState.selectedParcel &&
-        sceneDispatch({ type: 'selectParcel', parcelName: undefined })
+        id === selectedParcelId &&
+        geometryDispatch({ type: 'setSelectedParcelId', parcelId: undefined })
       }
       onClick={handleClick}
       position={[x, y, z]}

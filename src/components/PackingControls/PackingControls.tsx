@@ -1,6 +1,6 @@
 import { ProblemSetModal } from '@components';
 import { Bin, Parcel } from '@entities';
-import { useGeometryDispatch, useGeometryState } from '@hooks';
+import { useGeometryDispatch, useGeometryState } from '@stateHooks';
 import { PackingInstructions as PackingInstructionsType } from '@types';
 import { Button, ButtonColor, ButtonSize } from '@ui';
 import { useEffect, useState } from 'react';
@@ -43,7 +43,6 @@ export const PackingControls = ({ closeControls }: PackingControlsProps) => {
   }, [parcels, bins, setValue]);
 
   const pack: SubmitHandler<FormInputs> = (data) => {
-    console.log('running pack');
     geometryDispatch({
       type: 'setParcels',
       payload: data.parcels.map(

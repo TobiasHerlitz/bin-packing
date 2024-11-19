@@ -1,5 +1,5 @@
-import { useGeometryDispatch } from '@hooks';
 import { BRSets } from '@problemSets';
+import { useGeometryDispatch } from '@stateHooks';
 import { Button, ButtonColor, ButtonSize, Modal, Select } from '@ui';
 import { SubmitHandler, useForm } from 'react-hook-form';
 

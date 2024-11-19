@@ -1,21 +1,11 @@
-import { useGeometryState, useStageState } from '@hooks';
+import { useSelectedParcel } from '@stateHooks';
 
 import styles from './SelectedOverlay.module.css';
 
 export const SelectedOverlay = () => {
-  const stageState = useStageState();
-  const geometryState = useGeometryState();
-
-  if (!stageState.selectedParcel) {
-    return null;
-  }
-
-  const selectedParcel = geometryState.bins[0].parcels.find(
-    (parcel) => parcel.name === stageState.selectedParcel
-  );
+  const selectedParcel = useSelectedParcel();
 
   if (!selectedParcel) {
-    console.error('Could not find selected parcel');
     return null;
   }
 

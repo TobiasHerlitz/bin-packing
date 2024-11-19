@@ -15,9 +15,6 @@ export function stageReducer(
     case 'toggleScene': {
       return { ...state, showScene: !state.showScene };
     }
-    case 'selectParcel': {
-      return { ...state, selectedParcel: action.parcelName };
-    }
     case 'setCameraRef': {
       return { ...state, cameraRef: action.cameraRef };
     }

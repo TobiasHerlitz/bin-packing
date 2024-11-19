@@ -1,4 +1,4 @@
-import { useGeometryState } from '@hooks';
+import { useGeometryState } from '@stateHooks';
 
 import styles from './SolutionControls.module.css';
 

@@ -1,4 +1,4 @@
-import { useStageDispatch, useStageState } from '@hooks';
+import { useStageDispatch, useStageState } from '@stateHooks';
 import { Button, ButtonSize, Toggle } from '@ui';
 
 import styles from './StageControls.module.css';

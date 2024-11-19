@@ -22,7 +22,6 @@ export const buildLayers = (bin: Bin, parcels: Parcel[]) => {
 };
 
 const placeParcel = (shelf: Bin, parcel: Parcel) => {
-  console.log('placing', parcel.name);
   parcel.setPosition({
     x: shelf.usedWidth(),
     y: 0,

@@ -7,6 +7,8 @@ import { geometryInitialState } from './geometryInitialState';
 export interface GeometryState {
   parcels: Parcel[];
   bins: Bin[];
+  selectedBinId?: string;
+  selectedParcelId?: string;
 }
 
 export const GeometryContext =

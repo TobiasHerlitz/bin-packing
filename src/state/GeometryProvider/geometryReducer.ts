@@ -21,8 +21,20 @@ export function geometryReducer(
     case 'pack': {
       const clonedParcels = state.parcels.map((parcel) => parcel.clone());
       state.bins.forEach((bin) => bin.reset());
-      const bin = multipleContainersMinimizeCost(state.bins, clonedParcels);
-      return { ...state, bins: [bin] };
+      const bins = multipleContainersMinimizeCost(state.bins, clonedParcels);
+      const selectedBinId = bins?.[0].id;
+      return { ...state, bins, selectedBinId, selectedParcelId: undefined };
+    }
+    case 'setSelectedBinId': {
+      const isChangingBin = state.selectedBinId !== action.binId;
+      return {
+        ...state,
+        selectedBinId: action.binId,
+        ...(isChangingBin && { selectedParcelId: undefined }),
+      };
+    }
+    case 'setSelectedParcelId': {
+      return { ...state, selectedParcelId: action.parcelId };
     }
     default: {
       throw Error('Unknown action in geometryReducer');

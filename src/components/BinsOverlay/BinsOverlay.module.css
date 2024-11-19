@@ -59,3 +59,10 @@
     grid-column-start: 2;
   }
 }
+
+.showBin {
+/*  display: flex;*/
+/*  justify-content: center;*/
+  text-align: right;
+/*  height: 35px;*/
+}

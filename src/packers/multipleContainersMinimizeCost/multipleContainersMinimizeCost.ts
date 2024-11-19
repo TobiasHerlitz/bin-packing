@@ -24,20 +24,37 @@ export const multipleContainersMinimizeCost = (
 
   const layerGroupings = createLayerGroupings(parcels);
 
-  const layers = buildLayers(bins[0], layerGroupings[0].parcels);
-  combineLayers(bins, layers);
-  // bins[0].parcels = layers[0].parcels;
-  return bins[0];
+  const layers: Bin[] = [];
+  layerGroupings.forEach(({ parcels }) => {
+    layers.push(...buildLayers(bins[0], parcels));
+  });
+
+  const packedBins = combineLayers(bins[0], layers);
+
+  return packedBins;
 };
 
-const combineLayers = (bins: Bin[], layers: Bin[]) => {
-  const bin = bins[0];
+const combineLayers = (binPrototype: Bin, layers: Bin[]) => {
+  const packedBins: Bin[] = [];
   let pivotY = 0;
 
   layers.forEach((layer) => {
-    // if (pivotY + layer.size.height > bin.size.height) {
-    //   throw new Error('This is where a new bin would be added')
-    // }
+    // Todo. Can make this best fit, iterate over all bins
+    if (
+      !packedBins.length ||
+      pivotY + layer.size.height > packedBins[packedBins.length - 1].size.height
+    ) {
+      pivotY = 0;
+      packedBins.push(
+        new Bin({
+          size: {
+            width: binPrototype.size.width,
+            height: binPrototype.size.height,
+            depth: binPrototype.size.depth,
+          },
+        })
+      );
+    }
 
     const shiftedParcels = layer.parcels.map((parcel) => {
       const { x, y, z } = parcel.getPosition();
@@ -49,9 +66,11 @@ const combineLayers = (bins: Bin[], layers: Bin[]) => {
       return parcel;
     });
 
-    bin.parcels.push(...shiftedParcels);
+    packedBins[packedBins.length - 1].parcels.push(...shiftedParcels);
     pivotY += layer.size.height;
   });
+
+  return packedBins;
 };
 
 export const allParcelsPlaced = (bins: Bin[], parcels: Parcel[]) => {
