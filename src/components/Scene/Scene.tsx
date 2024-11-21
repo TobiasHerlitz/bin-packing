@@ -23,10 +23,10 @@ export const Scene = () => {
 
   // Pack initial state on first render during development to improve DX
   useEffect(() => {
-    if (bins && parcels && bins.every((({parcels}) => !parcels.length))) {
+    if (bins && parcels && bins.every(({ parcels }) => !parcels.length)) {
       geometryDispatch({ type: 'pack' });
     }
-  }, []);
+  }, [bins, geometryDispatch, parcels]);
 
   useEffect(() => {
     if (!cameraRef) return;
