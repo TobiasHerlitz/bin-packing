@@ -44,8 +44,8 @@ jobs:
     if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-        uses: actions/checkout@v4
-        uses: freeedcom/ai-codereviewer@v2.7.0
+      - uses: actions/checkout@v4
+      - uses: freeedcom/ai-codereviewer@v2.7.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
