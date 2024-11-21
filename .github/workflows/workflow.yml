@@ -2,11 +2,16 @@ name: code-checking
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
     branches:
       - main
   push:
     branches:
       - main
+
+permissions: write-all
 
 jobs:
   eslint:
