@@ -1,6 +1,6 @@
 import { Bin } from '@entities';
 import { ColumnDef } from '@tanstack/react-table';
-import { Button, ButtonColor, ButtonSize, InputTable } from '@ui';
+import { Button, ButtonColor, ButtonSize, Table } from '@ui';
 import { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
 
@@ -109,7 +109,7 @@ export const BinInputs = ({ form }: BinsProps) => {
   return (
     <div className={styles.binInputs}>
       <h3>Bins</h3>
-      <InputTable className={styles.table} columns={columns} data={fields} />
+      <Table className={styles.table} columns={columns} data={fields} />
       <Button
         className={styles.addRowButton}
         colorScheme={ButtonColor.Secondary}

@@ -2,30 +2,39 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getExpandedRowModel,
   InitialTableState,
+  Row,
   useReactTable,
 } from '@tanstack/react-table';
+import { ReactElement } from 'react';
 
-import styles from './InputTable.module.css';
+import styles from './Table.module.css';
 
-interface InputTableProps<TData> {
+interface TableProps<TData> {
   data: TData[];
   columns: ColumnDef<TData>[];
   initialState?: InitialTableState;
+  renderExpandedRow?: (row: Row<TData>) => ReactElement;
   className?: string;
 }
 
-export const InputTable = <TData extends object>({
+export const Table = <TData extends object>({
   columns,
   data,
   initialState,
+  renderExpandedRow,
   className,
-}: InputTableProps<TData>) => {
+}: TableProps<TData>) => {
   const table = useReactTable({
     columns,
     data,
     initialState,
     getCoreRowModel: getCoreRowModel(),
+    ...(renderExpandedRow && {
+      getRowCanExpand: () => true,
+      getExpandedRowModel: getExpandedRowModel(),
+    }),
   });
 
   return (
@@ -51,13 +60,22 @@ export const InputTable = <TData extends object>({
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className={styles.cell}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
+          <>
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className={styles.cell}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+            {row.getIsExpanded() && renderExpandedRow && (
+              <tr>
+                <td colSpan={row.getAllCells().length}>
+                  {renderExpandedRow(row)}
+                </td>
+              </tr>
+            )}
+          </>
         ))}
       </tbody>
     </table>

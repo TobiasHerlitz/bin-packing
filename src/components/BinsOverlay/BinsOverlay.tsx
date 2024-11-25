@@ -1,7 +1,7 @@
 import { Bin } from '@entities';
 import { useGeometryDispatch, useGeometryState } from '@stateHooks';
-import { ColumnDef } from '@tanstack/react-table';
-import { Button, ButtonColor, InputTable } from '@ui';
+import { ColumnDef, Row } from '@tanstack/react-table';
+import { Button, ButtonColor, Table } from '@ui';
 import { useMemo, useState } from 'react';
 
 import styles from './BinsOverlay.module.css';
@@ -18,9 +18,15 @@ export const BinsOverlay = () => {
       {
         id: 'expand',
         size: 40,
-        cell: () => (
-          <Button icon="unfold_more" colorScheme={ButtonColor.BGColor} />
-        ),
+        cell: ({ row }) => {
+          return (
+            <Button
+              onClick={row.getToggleExpandedHandler()}
+              icon={row.getIsExpanded() ? 'unfold_less' : 'unfold_more'}
+              colorScheme={ButtonColor.BGColor}
+            />
+          );
+        },
       },
       {
         id: 'name',
@@ -72,6 +78,10 @@ export const BinsOverlay = () => {
     [geometryDispatch]
   );
 
+  const renderExpandedBin = (row: Row<Bin>) => {
+    return <span>{row.original.parcels[0].name}</span>;
+  };
+
   if (!packedBins.length) {
     return null;
   }
@@ -90,10 +100,11 @@ export const BinsOverlay = () => {
         />
       </div>
       {isExpanded && (
-        <InputTable
+        <Table
           className={styles.table}
           columns={columns}
           data={bins}
+          renderExpandedRow={renderExpandedBin}
           initialState={{ rowSelection: { [selectedIndex]: true } }}
         />
       )}
