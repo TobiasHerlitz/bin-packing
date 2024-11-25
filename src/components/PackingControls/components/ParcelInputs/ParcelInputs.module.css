@@ -15,3 +15,22 @@
 .addRowButton {
   margin-left: auto;
 }
+
+.table {
+  margin-bottom: var(--gap-2);
+
+  input {
+    width: 100%;
+    padding: var(--gap);
+    background: var(--bg-color);
+    color: var(--font-color);
+    border: none;
+    outline: none;
+  }
+
+  input:focus {
+    background: var(--font-color);
+    color: var(--bg-color);
+    text-align: center;
+  }
+}

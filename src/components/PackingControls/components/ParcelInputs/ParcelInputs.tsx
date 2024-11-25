@@ -124,7 +124,7 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
   return (
     <div className={styles.parcelInputs}>
       <h3>Parcels</h3>
-      <InputTable columns={columns} data={fields} />
+      <InputTable className={styles.table} columns={columns} data={fields} />
       <Button
         className={styles.addRowButton}
         colorScheme={ButtonColor.Secondary}

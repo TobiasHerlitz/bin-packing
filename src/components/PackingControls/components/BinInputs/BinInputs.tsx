@@ -109,7 +109,7 @@ export const BinInputs = ({ form }: BinsProps) => {
   return (
     <div className={styles.binInputs}>
       <h3>Bins</h3>
-      <InputTable columns={columns} data={fields} />
+      <InputTable className={styles.table} columns={columns} data={fields} />
       <Button
         className={styles.addRowButton}
         colorScheme={ButtonColor.Secondary}

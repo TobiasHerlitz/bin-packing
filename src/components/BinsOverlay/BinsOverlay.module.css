@@ -11,30 +11,6 @@
   gap: var(--gap);
 }
 
-
-.table {
-  border-collapse: collapse;
-
-  th {
-    text-align: left;
-    padding: var(--gap);
-    border-left: 1px solid var(--font-color);
-    border-bottom: 1px solid var(--font-color);
-  }
-
-  td {
-    border-left: 1px solid var(--font-color);
-    padding: var(--gap);
-    font-family: "Inconsolata", sans-serif;
-    font-size: 18px;
-  }
-
-  td:first-child, th:first-child {
-    border-left: none;
-    min-width: 120px;
-  }
-}
-
 .header {
   width: 100%;
   display: grid;
@@ -60,9 +36,16 @@
   }
 }
 
-.showBin {
-/*  display: flex;*/
-/*  justify-content: center;*/
-  text-align: right;
-/*  height: 35px;*/
+.table {
+  td {
+    padding: var(--gap);
+  }
+
+  td:first-child, th:first-child {
+    border-bottom: none;
+  }
+
+  td:nth-child(2), th:nth-child(2) {
+    border-left: none;
+  }
 }

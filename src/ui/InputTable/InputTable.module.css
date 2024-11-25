@@ -1,5 +1,4 @@
 .table {
-  margin-bottom: var(--gap-2);
   border-collapse: collapse;
   table-layout: fixed;
 
@@ -11,26 +10,7 @@
   }
 
   td {
-    border-left: 1px solid var(--font-color);
-    border-bottom: 1px solid var(--font-color);
     padding: 0;
-    background: var(--bg-color);
-
-    input {
-      width: 100%;
-      background: var(--bg-color);
-      color: var(--font-color);
-      border: none;
-      outline: none;
-      padding: var(--gap);
-    }
-
-    input:focus {
-      background: var(--font-color);
-      color: var(--bg-color);
-      text-align: center;
-    }
-
   }
 
   td:first-child, th:first-child {
@@ -41,4 +21,9 @@
     border-left: none;
     border-bottom: none;
   }
+}
+
+.cell {
+  border-left: 1px solid var(--font-color);
+  border-bottom: 1px solid var(--font-color);
 }
