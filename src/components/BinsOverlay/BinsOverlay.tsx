@@ -1,4 +1,4 @@
-import { Bin } from '@entities';
+import { Bin, Parcel } from '@entities';
 import { useGeometryDispatch, useGeometryState } from '@stateHooks';
 import { ColumnDef, Row } from '@tanstack/react-table';
 import { Button, ButtonColor, Table } from '@ui';
@@ -79,7 +79,36 @@ export const BinsOverlay = () => {
   );
 
   const renderExpandedBin = (row: Row<Bin>) => {
-    return <span>{row.original.parcels[0].name}</span>;
+    const columns: ColumnDef<Parcel>[] = [
+      {
+        id: 'name',
+        size: 260,
+        cell: ({ row: { original } }) => original.name,
+      },
+      {
+        id: 'width',
+        size: 80,
+        cell: ({ row: { original } }) => original.getRotatedSize().width,
+      },
+      {
+        id: 'height',
+        size: 80,
+        cell: ({ row: { original } }) => original.getRotatedSize().height,
+      },
+      {
+        id: 'depth',
+        size: 80,
+        cell: ({ row: { original } }) => original.getRotatedSize().depth,
+      },
+    ];
+    return (
+      <Table
+        className={styles.subTable}
+        data={row.original.parcels}
+        columns={columns}
+        noHeader
+      />
+    );
   };
 
   if (!packedBins.length) {

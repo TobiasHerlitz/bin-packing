@@ -31,4 +31,11 @@
     color: var(--bg-color);
     text-align: center;
   }
+
+  > tbody > tr, > thead > tr {
+    td:last-child, th:last-child {
+      border-top: none;
+      border-left: none;
+    }
+  }
 }

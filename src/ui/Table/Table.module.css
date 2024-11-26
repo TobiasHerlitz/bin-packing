@@ -1,29 +1,32 @@
 .table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0.1px;
   table-layout: fixed;
 
-  th {
-    text-align: left;
-    padding: var(--gap);
-    border-left: 1px solid var(--font-color);
-    border-bottom: 1px solid var(--font-color);
+  > thead > tr {
+    > th {
+      text-align: left;
+      padding: var(--gap);
+      border-left: 1px solid var(--font-color);
+    }
+
+    > th:first-child {
+      border-left: none;
+    }
   }
 
-  td {
-    padding: 0;
-  }
+  > tbody > tr {
+    > td {
+      border-top: 1px solid var(--font-color);
+      border-left: 1px solid var(--font-color);
+    }
 
-  td:first-child, th:first-child {
-    border-left: none;
-  }
-
-  td:last-child, th:last-child {
-    border-left: none;
-    border-bottom: none;
+    > td:first-child {
+      border-left: none;
+    }
   }
 }
 
-.cell {
-  border-left: 1px solid var(--font-color);
-  border-bottom: 1px solid var(--font-color);
+.expandedRow > td {
+  padding: 0 !important;
 }

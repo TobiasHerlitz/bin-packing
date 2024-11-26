@@ -37,15 +37,32 @@
 }
 
 .table {
-  td {
+  > tbody > tr,  > thead > tr {
+    > td {
+      padding: var(--gap);
+    }
+
+    > td:first-child {
+        border-top: none;
+      }
+
+    > td:nth-child(2), > th:nth-child(2) {
+      border-left: none;
+    }
+
+    > td:last-child, > th:last-child {
+      border-left: none;
+      border-top: none;
+    }
+  }
+}
+
+.subTable {
+  margin-left: 44px;
+  background: var(--primary-color-1);
+  border-right: 1px solid var(--font-color);
+
+  > tbody > tr > td{
     padding: var(--gap);
-  }
-
-  td:first-child, th:first-child {
-    border-bottom: none;
-  }
-
-  td:nth-child(2), th:nth-child(2) {
-    border-left: none;
   }
 }
