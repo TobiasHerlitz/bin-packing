@@ -1,6 +1,6 @@
 import { Parcel } from '@entities';
 import { ColumnDef } from '@tanstack/react-table';
-import { Button, ButtonColor, ButtonSize, InputTable } from '@ui';
+import { Button, ButtonColor, ButtonSize, Table } from '@ui';
 import { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
 
@@ -124,7 +124,7 @@ export const ParcelInputs = ({ form }: ParcelsProps) => {
   return (
     <div className={styles.parcelInputs}>
       <h3>Parcels</h3>
-      <InputTable columns={columns} data={fields} />
+      <Table className={styles.table} columns={columns} data={fields} />
       <Button
         className={styles.addRowButton}
         colorScheme={ButtonColor.Secondary}

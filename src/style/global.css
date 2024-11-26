@@ -124,7 +124,7 @@ table {
   }
 }
 
-input {
+input, tbody {
   font-family: "Inconsolata", sans-serif;
   font-size: 18px;
 }

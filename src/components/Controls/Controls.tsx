@@ -1,4 +1,4 @@
-import { PackingControls, SolutionControls, StageControls } from '@components';
+import { PackingControls, StageControls } from '@components';
 import { useClickOutside } from '@hooks';
 import { Button, ButtonColor } from '@ui';
 import { ReactNode, useRef, useState } from 'react';
@@ -30,12 +30,6 @@ export const Controls = () => {
       component: (
         <PackingControls closeControls={() => setSelectedTab(undefined)} />
       ),
-    },
-    {
-      category: TabCategory.Solution,
-      heading: 'SOLUTION',
-      icon: 'local_shipping',
-      component: <SolutionControls />,
     },
     {
       category: TabCategory.Stage,

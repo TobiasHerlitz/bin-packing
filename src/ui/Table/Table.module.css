@@ -1,0 +1,32 @@
+.table {
+  border-collapse: separate;
+  border-spacing: 0.1px;
+  table-layout: fixed;
+
+  > thead > tr {
+    > th {
+      text-align: left;
+      padding: var(--gap);
+      border-left: 1px solid var(--font-color);
+    }
+
+    > th:first-child {
+      border-left: none;
+    }
+  }
+
+  > tbody > tr {
+    > td {
+      border-top: 1px solid var(--font-color);
+      border-left: 1px solid var(--font-color);
+    }
+
+    > td:first-child {
+      border-left: none;
+    }
+  }
+}
+
+.expandedRow > td {
+  padding: 0 !important;
+}
