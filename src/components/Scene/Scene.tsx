@@ -19,14 +19,18 @@ export const Scene = () => {
   const { showScene, showPerformance } = useStageState();
   const stageDispatch = useStageDispatch();
   const geometryDispatch = useGeometryDispatch();
-  const { bins, parcels } = useGeometryState();
+  const { solution, parcels } = useGeometryState();
 
   // Pack initial state on first render during development to improve DX
   useEffect(() => {
-    if (bins && parcels && bins.every(({ parcels }) => !parcels.length)) {
+    if (
+      solution &&
+      parcels &&
+      solution.every(({ parcels }) => !parcels.length)
+    ) {
       geometryDispatch({ type: 'pack' });
     }
-  }, [bins, geometryDispatch, parcels]);
+  }, [solution, geometryDispatch, parcels]);
 
   useEffect(() => {
     if (!cameraRef) return;

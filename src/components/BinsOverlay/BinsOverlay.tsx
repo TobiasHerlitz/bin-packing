@@ -8,10 +8,10 @@ import styles from './BinsOverlay.module.css';
 
 export const BinsOverlay = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const { bins, selectedBinId } = useGeometryState();
+  const { solution, selectedBinId } = useGeometryState();
   const geometryDispatch = useGeometryDispatch();
 
-  const packedBins = bins.filter((bin) => bin.parcels.length > 0);
+  const packedBins = solution.filter((bin) => bin.parcels.length > 0);
 
   const columns: ColumnDef<Bin>[] = useMemo(
     () => [
@@ -115,7 +115,9 @@ export const BinsOverlay = () => {
     return null;
   }
 
-  const selectedIndex = bins.findIndex((bin: Bin) => bin.id === selectedBinId);
+  const selectedIndex = solution.findIndex(
+    (bin: Bin) => bin.id === selectedBinId
+  );
   return (
     <div className={styles.binsOverlay}>
       <div
@@ -132,7 +134,7 @@ export const BinsOverlay = () => {
         <Table
           className={styles.table}
           columns={columns}
-          data={bins}
+          data={solution}
           renderExpandedRow={renderExpandedBin}
           initialState={{ rowSelection: { [selectedIndex]: true } }}
         />

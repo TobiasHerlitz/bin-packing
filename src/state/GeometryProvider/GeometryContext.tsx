@@ -7,6 +7,7 @@ import { geometryInitialState } from './geometryInitialState';
 export interface GeometryState {
   parcels: Parcel[];
   bins: Bin[];
+  solution: Bin[];
   selectedBinId?: string;
   selectedParcelId?: string;
 }

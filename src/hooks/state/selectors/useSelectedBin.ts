@@ -2,9 +2,9 @@ import { useGeometryState } from '@stateHooks';
 import { useMemo } from 'react';
 
 export function useSelectedBin() {
-  const { selectedBinId, bins } = useGeometryState();
+  const { selectedBinId, solution } = useGeometryState();
 
   return useMemo(() => {
-    return bins.find(({ id }) => id === selectedBinId);
-  }, [selectedBinId, bins]);
+    return solution.find(({ id }) => id === selectedBinId);
+  }, [selectedBinId, solution]);
 }

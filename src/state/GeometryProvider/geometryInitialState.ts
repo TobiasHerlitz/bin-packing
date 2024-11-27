@@ -7,4 +7,5 @@ export const geometryInitialState: GeometryState = {
   selectedParcelId: undefined,
   parcels: customSets.custom1[0].parcels,
   bins: [customSets.custom1[0].bin],
+  solution: [],
 };

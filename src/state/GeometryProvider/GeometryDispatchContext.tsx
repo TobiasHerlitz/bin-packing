@@ -16,6 +16,11 @@ interface SetBins {
   payload: Bin[];
 }
 
+interface SetSolution {
+  type: 'setSolution';
+  payload: Bin[];
+}
+
 interface Pack {
   type: 'pack';
 }
@@ -34,6 +39,7 @@ export type GeometryActions =
   | AddParcel
   | SetParcels
   | SetBins
+  | SetSolution
   | Pack
   | SetSelectedBinId
   | SetSelectedParcelId;
