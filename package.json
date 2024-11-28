@@ -10,7 +10,10 @@
     "check:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "storybook": "storybook dev -p 8001 --no-open",
     "build-storybook": "storybook build",
-    "coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:tests": "vitest --exclude **/*benchmark.test.ts",
+    "test:benchmarks": "vitest run benchmark --run --reporter ./src/tests/metaReporter.ts",
+    "test:all": "vitest run"
   },
   "dependencies": {
     "@react-three/drei": "^9.111.2",

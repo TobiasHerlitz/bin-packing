@@ -1,3 +1,4 @@
+export { averageFillRate } from './averageFillRate';
 export { axisToCoordinate } from './axisToCoordinate';
 export { axisToSize } from './axisToSize';
 export { calculateTotalCost } from './calculateTotalCost';
