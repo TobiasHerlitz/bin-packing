@@ -13,8 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "test:tests": "vitest --exclude **/*benchmark.test.ts",
     "test:benchmarks": "vitest run benchmark --run --reporter ./src/tests/metaReporter.ts",
-    "test:all": "vitest run",
-    "test:ci": "vitest --exclude **/*benchmark.test.ts --run"
+    "test:all": "vitest run"
   },
   "dependencies": {
     "@react-three/drei": "^9.111.2",

@@ -44,7 +44,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - run: bun install
-      - run: bun test:ci
+      - run: bun run vitest --exclude **/*benchmark.test.ts --run
 
   # This wasn't helpful, hallucinations and way too verbose
   # review:
